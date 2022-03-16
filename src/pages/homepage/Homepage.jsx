@@ -1,5 +1,5 @@
 import './Homepage.css'
-import { image, center as heroImage } from '../assets/images/index'
+import { image, center as heroImage } from '../../assets/images/index'
 
 export function Homepage() {
   return (
