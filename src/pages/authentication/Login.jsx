@@ -69,7 +69,7 @@ export function Login() {
             Login
           </button>
           <div className="register text__center">
-            <a href="./register.html">Create a new account ></a>
+            <a href="./register.html">Create a new account </a>
           </div>
         </div>
       </div>

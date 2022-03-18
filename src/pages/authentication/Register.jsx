@@ -99,7 +99,7 @@ export function Register() {
             Create a new Account
           </button>
           <div className="register text__center">
-            <a href="./login.html">Already have an account ></a>
+            <a href="./login.html">Already have an account </a>
           </div>
         </div>
       </div>
