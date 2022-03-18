@@ -1,40 +1,10 @@
 import { image } from '../../assets/images/index'
+import { Navbar } from '../../components/navbar/Navbar.jsx'
 import './Wishlist.css'
 export function Wishlist() {
   return (
     <div className="home__container">
-      <nav className="navbar simple">
-        <a href="../index.html">
-          <h3 className="navbar__header">Games-Cart</h3>
-        </a>
-        <ul className="navbar__list">
-          <li className="navbar__list__items">
-            <input type="text" className="search" placeholder="  🔍Search" />
-          </li>
-          <li className="navbar__list__items">
-            <a href="./logout.html">
-              <button className="btn btn__primary">Logout</button>
-            </a>
-          </li>
-
-          <li className="navbar__list__items">
-            <span className="badge__icons">
-              <a href="./wishlist.html">
-                <i className="fa-regular fa-heart icon"></i>
-                <span className="badge__number badge__primary"> 5 </span>
-              </a>
-            </span>
-          </li>
-          <li className="navbar__list__items">
-            <span className="badge__icons">
-              <a href="./cart.html">
-                <i className="fa-solid fa-cart-shopping icon"></i>
-                <span className="badge__number badge__primary">5</span>
-              </a>
-            </span>
-          </li>
-        </ul>
-      </nav>
+      <Navbar />
 
       <div className="main__container">
         <h3 className="text__center font__regular">My Wishlist</h3>
