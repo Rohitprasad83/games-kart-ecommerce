@@ -1,0 +1,77 @@
+@import url(../../styles/index.css);
+.home__container {
+    display: grid;
+    width: 100%;
+    height: auto;
+    grid-template-areas: 'header' 'main';
+    grid-template-rows: 8rem auto;
+    grid-template-columns: 1fr;
+}
+
+.navbar {
+    grid-area: header;
+    height: 8rem;
+    background-color: var(--white);
+}
+
+.main__container {
+    grid-area: main;
+    border-radius: 1rem;
+}
+
+.form__group {
+    padding: 2rem 5rem;
+    max-width: 60rem;
+    margin: 1rem auto;
+    color: var(--dark);
+    border-radius: 1rem;
+    gap: 1rem;
+}
+
+input {
+    border: 1px solid var(--gray);
+}
+
+.form__group>h4 {
+    margin: 3rem auto;
+}
+
+.form__name {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+}
+
+.form__bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+    align-items: center;
+}
+
+.form__group>.btn {
+    width: 100%;
+    margin: 1rem auto;
+}
+
+.register {
+    cursor: pointer;
+}
+
+.forgot__password {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.logged__out {
+    margin: 3rem auto;
+}
+
+@media only screen and (max-width: 640px) {
+     :root {
+        font-size: 55%;
+    }
+    .form__group {
+        padding: 1rem;
+    }
+}

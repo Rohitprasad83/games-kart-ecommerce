@@ -1,0 +1,43 @@
+.home__container {
+    display: grid;
+    width: 100%;
+    height: auto;
+    grid-template-areas: 'header' 'main';
+    grid-template-rows: 8rem auto;
+    grid-template-columns: 1fr;
+}
+
+.main__container {
+    grid-area: main;
+    margin: 4rem 1rem;
+    border: 1px solid var(--gray);
+    padding: 5rem 0;
+    border-radius: 1rem;
+    background-color: var(--white)
+}
+
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    cursor: pointer;
+}
+
+.categories>.card {
+    width: 20rem;
+}
+
+.center__image {
+    max-width: 80rem;
+    margin: 3rem auto;
+}
+
+.bottom__categories {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

@@ -1,54 +1,8 @@
-@import url(https://particle-ui.netlify.app/main.css);
-.home__container {
-    display: grid;
-    width: 100%;
-    height: auto;
-    grid-template-areas: 'header' 'main';
-    grid-template-rows: 8rem auto;
-    grid-template-columns: 1fr;
-}
-
 .navbar {
     grid-area: header;
     height: 8rem;
     z-index: 1;
     background-color: var(--white);
-}
-
-.main__container {
-    grid-area: main;
-    margin: 4rem 1rem;
-    border: 1px solid var(--gray)
-}
-
-.categories {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.card {
-    cursor: pointer;
-}
-
-.categories>.card {
-    width: 20rem;
-}
-
-.center__image {
-    max-width: 80rem;
-    margin: 3rem auto;
-}
-
-.bottom__categories {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.badge__icons .icon {
-    font-size: 2.5rem;
 }
 
 .navbar__list__items .btn {
@@ -75,6 +29,10 @@
     margin: 0 1rem 0 auto;
 }
 
+.badge__icons .icon {
+    font-size: 2.5rem;
+}
+
 .badge__icons {
     height: 5rem;
 }
@@ -89,7 +47,7 @@
 
 @media only screen and (max-width: 480px) {
     .navbar__header {
-        font-size: 1.4rem;
+        font-size: 1.5rem;
     }
     .navbar__list__items .btn {
         font-size: 1.2rem;
@@ -115,9 +73,6 @@
 }
 
 @media only screen and (min-width: 480px) and (max-width: 768px) {
-    .navbar__header {
-        font-size: 1.6rem;
-    }
     .navbar__list__items .btn {
         font-size: 1.2rem;
         width: 5rem;
