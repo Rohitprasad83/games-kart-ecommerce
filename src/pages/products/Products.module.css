@@ -1,5 +1,6 @@
 @import url(../../styles/index.css);
 .main__container {
+    grid-area: main;
     display: flex;
     justify-content: space-between;
     background-color: var(--white);
@@ -7,16 +8,6 @@
     margin: 4rem 1rem;
     padding: 2rem;
     border-radius: 1rem;
-}
-
-.btn {
-    font-size: 1.8rem;
-}
-
-.products {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
 }
 
 .filter {
@@ -34,6 +25,11 @@
     justify-content: space-between;
 }
 
+.slider__price {
+    display: flex;
+    justify-content: space-between;
+}
+
 .flex__column {
     display: flex;
     flex-direction: column;
@@ -41,8 +37,27 @@
     gap: 1rem;
 }
 
+.filter__clear {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.filter__names {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.products__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
 .card {
     width: 23rem;
+    margin: 1rem;
+    position: relative;
 }
 
 .card__image {
@@ -55,22 +70,15 @@
     object-fit: cover;
 }
 
+.btn {
+    font-size: 1.8rem;
+}
+
+.card__buttons {
+    justify-content: center;
+}
+
 .card__buttons .btn {
-    width: 100%;
-}
-
-.filter__clear {
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-.slider__price {
-    display: flex;
-    justify-content: space-between;
-}
-
-.filter__names {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+    width: 90%;
+    margin: 1rem 0;
 }
