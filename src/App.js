@@ -1,22 +1,28 @@
 import './App.css'
-import { Homepage } from './pages/homepage/Homepage.jsx'
-import { Products } from './pages/products/Products.jsx'
-import { Wishlist } from './pages/wishlist/Wishlist.jsx'
-import { Cart } from './pages/cart/Cart.jsx'
-import { Register } from './pages/authentication/Register.jsx'
-import { Login } from './pages/authentication/Login.jsx'
-import { Logout } from './pages/authentication/Logout.jsx'
+import { Routes, Route } from 'react-router-dom'
+
+import {
+  Homepage,
+  Products,
+  Wishlist,
+  Cart,
+  Register,
+  Login,
+  Logout,
+} from './pages/index'
 
 function App() {
   return (
     <div className="App">
-      <Cart />
-      <Wishlist />
-      <Homepage />
-      <Products />
-      <Register />
-      <Login />
-      <Logout />
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/logout" element={<Logout />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
     </div>
   )
 }
