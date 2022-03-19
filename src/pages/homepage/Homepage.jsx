@@ -1,6 +1,7 @@
 import '../../styles/index.css'
 import { image, center as heroImage } from '../../assets/images/index'
 import { Navbar } from '../../components/navbar/Navbar.jsx'
+import { Link } from 'react-router-dom'
 
 export function Homepage() {
   return (
@@ -9,34 +10,34 @@ export function Homepage() {
       <div className="main__container">
         <div className="categories">
           <div className="card card__shadow">
-            <a href="./pages/products.html">
+            <Link to="/products">
               <span className="card__text__overlay"> Action </span>{' '}
               <img src={image} alt="Action" className="responsive__img" />
-            </a>{' '}
+            </Link>{' '}
           </div>{' '}
           <div className="card card__shadow">
-            <a href="./pages/products.html">
+            <Link to="/products">
               <span className="card__text__overlay"> Arcade </span>{' '}
               <img src={image} alt="Arcade" className="responsive__img" />
-            </a>{' '}
+            </Link>{' '}
           </div>{' '}
           <div className="card card__shadow">
-            <a href="./pages/products.html">
+            <Link to="/products">
               <span className="card__text__overlay"> Strategy </span>{' '}
               <img src={image} alt="Strategy" className="responsive__img" />
-            </a>{' '}
+            </Link>{' '}
           </div>{' '}
           <div className="card card__shadow">
-            <a href="./pages/products.html">
+            <Link to="/products">
               <span className="card__text__overlay"> Casual </span>{' '}
               <img src={image} alt="Casual" className="responsive__img" />
-            </a>{' '}
+            </Link>{' '}
           </div>{' '}
           <div className="card card__shadow">
-            <a href="./pages/products.html">
+            <Link to="/products">
               <span className="card__text__overlay"> Sports </span>{' '}
               <img src={image} alt="Sports" className="responsive__img" />
-            </a>{' '}
+            </Link>{' '}
           </div>{' '}
         </div>
         <div className="center__image">

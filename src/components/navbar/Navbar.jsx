@@ -1,36 +1,37 @@
 import './Navbar.css'
+import { Link } from 'react-router-dom'
 export function Navbar() {
   return (
     <nav className="navbar simple">
-      <a href="./index.html">
-        <h3 className="navbar__header"> Games - Cart </h3>{' '}
-      </a>{' '}
+      <Link to="/">
+        <h3 className="navbar__header"> Games-Cart </h3>
+      </Link>
       <ul className="navbar__list">
         <li className="navbar__list__items">
           <input type="text" className="search" placeholder="  🔍Search" />
-        </li>{' '}
+        </li>
         <li className="navbar__list__items">
-          <a href="./pages/login.html">
-            <button className="btn btn__primary"> Login </button>{' '}
-          </a>{' '}
+          <Link to="/login">
+            <button className="btn btn__primary"> Login </button>
+          </Link>
         </li>
         <li className="navbar__list__items">
           <span className="badge__icons">
-            <a href="./pages/wishlist.html">
-              <i className="fa-regular fa-heart icon"> </i>{' '}
-              <span className="badge__number badge__primary"> 5 </span>{' '}
-            </a>{' '}
-          </span>{' '}
-        </li>{' '}
+            <Link to="/wishlist">
+              <i className="fa-regular fa-heart icon"> </i>
+              <span className="badge__number badge__primary"> 5 </span>
+            </Link>
+          </span>
+        </li>
         <li className="navbar__list__items">
           <span className="badge__icons">
-            <a href="./pages/cart.html">
-              <i className="fa-solid fa-cart-shopping icon"> </i>{' '}
-              <span className="badge__number badge__primary"> 5 </span>{' '}
-            </a>{' '}
-          </span>{' '}
-        </li>{' '}
-      </ul>{' '}
+            <Link to="/cart">
+              <i className="fa-solid fa-cart-shopping icon"> </i>
+              <span className="badge__number badge__primary"> 5 </span>
+            </Link>
+          </span>
+        </li>
+      </ul>
     </nav>
   )
 }

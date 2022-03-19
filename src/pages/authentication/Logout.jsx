@@ -1,5 +1,7 @@
 import auth from './Authentication.module.css'
 import { Navbar } from '../../components/navbar/Navbar.jsx'
+import { Link } from 'react-router-dom'
+
 export function Logout() {
   return (
     <div className="home__container">
@@ -40,7 +42,7 @@ export function Logout() {
             Login
           </button>
           <div className={`${auth['register']} text__center`}>
-            <a href="./register.html">Create a new account {'>'} </a>
+            <Link to="/register">Create a new account {'>'} </Link>
           </div>
         </div>
       </div>
