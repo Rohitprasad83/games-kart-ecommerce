@@ -1,21 +1,21 @@
-import './Authentication.css'
+import auth from './Authentication.module.css'
 import { Navbar } from '../../components/navbar/Navbar.jsx'
 export function Register() {
   return (
     <div className="home__container">
       <Navbar />
 
-      <div className="main__container">
-        <div className="form__group">
-          <h4>Sign up</h4>
-          <div className="form__name">
+      <div className={`${auth['main__container']}`}>
+        <div className={`form__group ${auth['form__group']}`}>
+          <h4 className={auth['form__heading']}>Sign up</h4>
+          <div className={auth['form__name']}>
             <label for="first__name">
               First Name
               <input
                 type="text"
                 id="first__name"
                 name="first__name"
-                className="form__group__input"
+                className={`form__group__input ${auth['input']}`}
               />
             </label>
             <label for="last__name">
@@ -24,7 +24,7 @@ export function Register() {
                 type="text"
                 id="last__name"
                 name="last__name"
-                className="form__group__input"
+                className={`form__group__input ${auth['input']}`}
               />
             </label>
           </div>
@@ -34,7 +34,7 @@ export function Register() {
               type="text"
               id="username"
               name="username"
-              className="form__group__input"
+              className={`form__group__input ${auth['input']}`}
             />
           </label>
           <label for="pass">
@@ -43,7 +43,7 @@ export function Register() {
               type="password"
               id="pass"
               name="pass"
-              className="form__group__input"
+              className={`form__group__input ${auth['input']}`}
             />
           </label>
 
@@ -53,23 +53,23 @@ export function Register() {
               type="password"
               id="confirm__password"
               name="confirm__password"
-              className="form__group__input"
+              className={`form__group__input ${auth['input']}`}
             />
           </label>
           <label>
             <input type="checkbox" className="show__password text__md" /> Show
             Password
           </label>
-          <div className="form__bottom">
+          <div className={auth['form__bottom']}>
             <label className="text__md">
               <input type="checkbox" />I accept all terms & conditions
             </label>
           </div>
-          <button className="btn btn__primary login">
+          <button className={`btn btn__primary login ${auth['btn']}`}>
             Create a new Account
           </button>
-          <div className="register text__center">
-            <a href="./login.html">Already have an account </a>
+          <div className={`${auth['register']} text__center`}>
+            <a href="./login.html">Already have an account {'>'}</a>
           </div>
         </div>
       </div>
