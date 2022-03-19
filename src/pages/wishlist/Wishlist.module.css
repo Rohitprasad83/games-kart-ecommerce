@@ -1,8 +1,10 @@
 @import url(../../styles/index.css);
 .main__container {
-    grid-area: main;
-    margin: 4rem 1rem rem;
-    border: 1px solid var(--gray);
+    display: block;
+}
+
+.wishlist__header {
+    margin: 5rem auto;
 }
 
 .card__image>img {
@@ -11,21 +13,12 @@
     object-fit: cover;
 }
 
-.card__buttons {
-    justify-content: center;
+.btn {
+    width: 90%;
+    margin: 1rem auto;
 }
 
-.card__buttons .btn {
-    width: 100%;
-}
-
-.main__container {
-    border: 2px solid var(--gray);
-    border-radius: 1rem;
-    padding: 2rem;
-}
-
-.wishlist {
+.wishlist__container {
     width: 100%;
     display: flex;
     flex-wrap: wrap;

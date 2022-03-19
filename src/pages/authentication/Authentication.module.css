@@ -1,21 +1,10 @@
 @import url(../../styles/index.css);
-.home__container {
-    display: grid;
-    width: 100%;
-    height: auto;
-    grid-template-areas: 'header' 'main';
-    grid-template-rows: 8rem auto;
-    grid-template-columns: 1fr;
-}
-
-.navbar {
-    grid-area: header;
-    height: 8rem;
-    background-color: var(--white);
-}
-
 .main__container {
     grid-area: main;
+    background-color: var(--white);
+    border: 2px solid var(--gray);
+    margin: 4rem 1rem;
+    padding: 2rem;
     border-radius: 1rem;
 }
 
@@ -28,11 +17,11 @@
     gap: 1rem;
 }
 
-input {
+.input {
     border: 1px solid var(--gray);
 }
 
-.form__group>h4 {
+.form__heading {
     margin: 3rem auto;
 }
 
@@ -65,6 +54,11 @@ input {
 
 .logged__out {
     margin: 3rem auto;
+}
+
+.form__group>.btn {
+    width: 100%;
+    margin: 1rem auto;
 }
 
 @media only screen and (max-width: 640px) {
