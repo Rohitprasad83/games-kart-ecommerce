@@ -1,5 +1,7 @@
 import auth from './Authentication.module.css'
 import { Navbar } from '../../components/navbar/Navbar.jsx'
+import { Link } from 'react-router-dom'
+
 export function Register() {
   return (
     <div className="home__container">
@@ -69,7 +71,7 @@ export function Register() {
             Create a new Account
           </button>
           <div className={`${auth['register']} text__center`}>
-            <a href="./login.html">Already have an account {'>'}</a>
+            <Link to="/login">Already have an account {'>'}</Link>
           </div>
         </div>
       </div>
