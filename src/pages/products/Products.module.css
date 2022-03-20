@@ -51,13 +51,14 @@
 .products__container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 .card {
     width: 23rem;
     margin: 1rem;
     position: relative;
+    height: max-content
 }
 
 .card__image {

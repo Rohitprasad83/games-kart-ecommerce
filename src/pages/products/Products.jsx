@@ -1,7 +1,19 @@
 import { Navbar } from '../../components/navbar/Navbar.jsx'
 import product from './Products.module.css'
 import { ProductCard } from './ProductCard'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+
 export function Products() {
+  const [state, setState] = useState([])
+  useEffect(() => {
+    ;(async function getData() {
+      const {
+        data: { products },
+      } = await axios.get('/api/products')
+      setState(products)
+    })()
+  }, [])
   return (
     <div className="home__container">
       <Navbar />
@@ -82,14 +94,9 @@ export function Products() {
           </div>
         </aside>
         <main className={product['products__container']}>
-          <ProductCard type="default" />
-          <ProductCard type="default" />
-          <ProductCard type="default" />
-          <ProductCard type="default" />
-          <ProductCard type="default" />
-          <ProductCard type="wishlist" />
-          <ProductCard type="default" />
-          <ProductCard type="wishlist" />
+          {state.map(product => (
+            <ProductCard {...product} />
+          ))}
         </main>
       </div>
     </div>
