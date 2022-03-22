@@ -83,16 +83,29 @@ export function Products() {
     }
   }
 
+  function sortRatingInDescending(products) {
+    return [...products].sort(
+      (firstItem, secondItem) => secondItem.rating - firstItem.rating
+    )
+  }
   function filterByRating(products, filterRating) {
     switch (filterRating) {
       case '4_STARS_ABOVE':
-        return [...products].filter(product => product.rating >= 4)
+        return sortRatingInDescending(
+          [...products].filter(product => product.rating >= 4)
+        )
       case '3_STARS_ABOVE':
-        return [...products].filter(product => product.rating >= 3)
+        return sortRatingInDescending(
+          [...products].filter(product => product.rating >= 3)
+        )
       case '2_STARS_ABOVE':
-        return [...products].filter(product => product.rating >= 2)
+        return sortRatingInDescending(
+          [...products].filter(product => product.rating >= 2)
+        )
       case '1_STARS_ABOVE':
-        return [...products].filter(product => product.rating >= 1)
+        return sortRatingInDescending(
+          [...products].filter(product => product.rating >= 1)
+        )
       default:
         return products
     }
