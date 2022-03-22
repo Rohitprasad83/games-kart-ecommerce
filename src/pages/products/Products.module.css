@@ -86,14 +86,16 @@
     margin: 1rem 0;
 }
 
-.left {
-    background-color: transparent;
-    color: var(--white);
-    padding: 1rem;
-    border-radius: 5px;
-    background-color: var(--primary);
-}
-
 .text__primary {
     color: var(--primary);
+}
+
+.card__info {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 2rem 0.5rem 2rem;
+}
+
+.star {
+    color: var(--warning);
 }

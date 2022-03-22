@@ -1,5 +1,4 @@
 import productStyle from './Products.module.css'
-import { image } from '../../assets/images/index'
 
 export function ProductCard({
   _id,
@@ -16,9 +15,7 @@ export function ProductCard({
       <span className="card__icon right">
         <i className="far fa-heart"></i>
       </span>
-      <span className={`card__icon left ${productStyle['left']} text__md`}>
-        <p>{categoryName}</p>
-      </span>
+
       <span className={productStyle['card__image']}>
         <img src={img} alt={title} />
       </span>
@@ -30,6 +27,14 @@ export function ProductCard({
           <span className="card__details__price__old">₹{oldPrice}</span>
           <span className="card__details__discount">{discount}off</span>
         </span>
+        <div className={`text__left text__md ${productStyle['card__info']}`}>
+          <span className="font__bold">{categoryName}</span>
+          <span>
+            {rating}
+            <i className={`fas fa-star ${productStyle['star']}`}></i>
+          </span>
+        </div>
+
         <div className={productStyle['card__buttons']}>
           <button className={`btn btn__primary ${productStyle['btn']}`}>
             Add to Cart
