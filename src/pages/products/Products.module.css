@@ -51,7 +51,9 @@
 .products__container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 5rem;
 }
 
 .card {
@@ -82,4 +84,16 @@
 .card__buttons .btn {
     width: 90%;
     margin: 1rem 0;
+}
+
+.left {
+    background-color: transparent;
+    color: var(--white);
+    padding: 1rem;
+    border-radius: 5px;
+    background-color: var(--primary);
+}
+
+.text__primary {
+    color: var(--primary);
 }

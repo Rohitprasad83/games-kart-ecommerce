@@ -1,11 +1,104 @@
 import { Navbar } from '../../components/navbar/Navbar.jsx'
 import product from './Products.module.css'
 import { ProductCard } from './ProductCard'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useReducer } from 'react'
 import axios from 'axios'
 
 export function Products() {
   const [state, setState] = useState([])
+  function reduceFn(state, action) {
+    if (action.type === 'Action')
+      return {
+        ...state,
+        category: { ...state.category, action: !state.category.action },
+      }
+    if (action.type === 'Adventure')
+      return {
+        ...state,
+        category: { ...state.category, adventure: !state.category.adventure },
+      }
+    if (action.type === 'Strategy')
+      return {
+        ...state,
+        category: { ...state.category, strategy: !state.category.strategy },
+      }
+    if (action.type === 'Arcade')
+      return {
+        ...state,
+        category: { ...state.category, arcade: !state.category.arcade },
+      }
+    if (action.type === 'Sports')
+      return {
+        ...state,
+        category: { ...state.category, sports: !state.category.sports },
+      }
+    if (action.type === 'PRICE_RANGE') {
+      return { ...state, rangeLimit: parseInt(action.payload, 10) }
+    }
+
+    switch (action.type) {
+      case 'LOW_TO_HIGH':
+        return { ...state, sortBy: 'LOW_TO_HIGH' }
+      case 'HIGH_TO_LOW':
+        return { ...state, sortBy: 'HIGH_TO_LOW' }
+      default:
+        return { ...state }
+    }
+  }
+  const [{ category, sortBy, rangeLimit }, dispatch] = useReducer(reduceFn, {
+    category: {
+      action: false,
+      adventure: false,
+      arcade: false,
+      strategy: false,
+      sports: false,
+    },
+    sortBy: null,
+    rangeLimit: 10000,
+  })
+  function sortFn(products, sortBy) {
+    switch (sortBy) {
+      case 'LOW_TO_HIGH':
+        return [...products].sort(
+          (firstItem, secondItem) => firstItem['price'] - secondItem['price']
+        )
+      case 'HIGH_TO_LOW':
+        return [...products].sort(
+          (firstItem, secondItem) => secondItem['price'] - firstItem['price']
+        )
+      default:
+        return products
+    }
+  }
+
+  function filterProducts(products, category) {
+    let filteredProducts = []
+    const newArray = Object.keys(category)
+    console.log(newArray)
+    let flag = false
+    for (const catName of newArray) {
+      console.log(catName)
+      if (category[catName]) {
+        flag = true
+        const temp = products.filter(
+          ({ categoryName }) =>
+            categoryName.toLowerCase() === catName.toLowerCase()
+        )
+        filteredProducts = [...filteredProducts, ...temp]
+      }
+    }
+    return flag ? filteredProducts : products
+  }
+
+  function filterRange(products, rangeLimit) {
+    return products.filter(product =>
+      product['price'] <= rangeLimit ? product : false
+    )
+  }
+  const filteredRange = filterRange(state, rangeLimit)
+  const filteredData = filterProducts(filteredRange, category)
+  const sortedData = sortFn(filteredData, sortBy)
+
   useEffect(() => {
     ;(async function getData() {
       const {
@@ -25,7 +118,7 @@ export function Products() {
             <button className={product['filter__clear']}>Clear</button>
           </div>
           <div className={`filter__slider ${product['flex__column']} text__md`}>
-            <label for="slider">Select your Price Range</label>
+            <label for="slider">Select your Price</label>
             <div className={`${product['slider__price']} text__md font__light`}>
               <span>1000</span>
               <span>5500</span>
@@ -36,32 +129,53 @@ export function Products() {
               type="range"
               min="1000"
               max="10000"
-              value="5500"
+              value={rangeLimit}
               className="slider"
+              onChange={e =>
+                dispatch({ type: 'PRICE_RANGE', payload: e.target.value })
+              }
             />
-            <div className="slider__output text__md"></div>
+            <div className="slider__output text__md">
+              Selected Price is{' '}
+              <span className={product['text__primary']}>₹ {rangeLimit}</span>
+            </div>
           </div>
           <div className={`filter__category ${product['flex__column']}`}>
             <h5>Category</h5>
 
             <label className={product['filter__names']}>
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                onClick={() => dispatch({ type: 'Action' })}
+              />
               Action
             </label>
             <label className={product['filter__names']}>
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                onClick={() => dispatch({ type: 'Arcade' })}
+              />
               Arcade
             </label>
             <label className={product['filter__names']}>
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                onClick={() => dispatch({ type: 'Strategy' })}
+              />
               Strategy
             </label>
             <label className={product['filter__names']}>
-              <input type="checkbox" />
-              Casual
+              <input
+                type="checkbox"
+                onClick={() => dispatch({ type: 'Adventure' })}
+              />
+              Adventure
             </label>
             <label className={product['filter__names']}>
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                onClick={() => dispatch({ type: 'Sports' })}
+              />
               Sports
             </label>
           </div>
@@ -84,18 +198,26 @@ export function Products() {
           <div className={`filter__sorting ${product['flex__column']}`}>
             <h5>Sort By</h5>
             <label className={product['filter__names']}>
-              <input type="radio" name="sorting" />
+              <input
+                type="radio"
+                name="sorting"
+                onClick={() => dispatch({ type: 'LOW_TO_HIGH' })}
+              />
               Price: Low to High
             </label>
             <label className={product['filter__names']}>
-              <input type="radio" name="sorting" />
+              <input
+                type="radio"
+                name="sorting"
+                onClick={() => dispatch({ type: 'HIGH_TO_LOW' })}
+              />
               Price: High to Low
             </label>
           </div>
         </aside>
         <main className={product['products__container']}>
-          {state.map(product => (
-            <ProductCard {...product} />
+          {sortedData.map(product => (
+            <ProductCard key={product['id']} {...product} />
           ))}
         </main>
       </div>
