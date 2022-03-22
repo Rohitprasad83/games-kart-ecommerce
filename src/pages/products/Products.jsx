@@ -41,21 +41,33 @@ export function Products() {
         return { ...state, sortBy: 'LOW_TO_HIGH' }
       case 'HIGH_TO_LOW':
         return { ...state, sortBy: 'HIGH_TO_LOW' }
+      case '4_STARS_ABOVE':
+        return { ...state, rating: '4_STARS_ABOVE' }
+      case '3_STARS_ABOVE':
+        return { ...state, rating: '3_STARS_ABOVE' }
+      case '2_STARS_ABOVE':
+        return { ...state, rating: '2_STARS_ABOVE' }
+      case '1_STARS_ABOVE':
+        return { ...state, rating: '1_STARS_ABOVE' }
       default:
         return { ...state }
     }
   }
-  const [{ category, sortBy, rangeLimit }, dispatch] = useReducer(reduceFn, {
-    category: {
-      action: false,
-      adventure: false,
-      arcade: false,
-      strategy: false,
-      sports: false,
-    },
-    sortBy: null,
-    rangeLimit: 10000,
-  })
+  const [{ category, sortBy, rangeLimit, rating }, dispatch] = useReducer(
+    reduceFn,
+    {
+      category: {
+        action: false,
+        adventure: false,
+        arcade: false,
+        strategy: false,
+        sports: false,
+      },
+      sortBy: null,
+      rangeLimit: 10000,
+      rating: null,
+    }
+  )
   function sortFn(products, sortBy) {
     switch (sortBy) {
       case 'LOW_TO_HIGH':
@@ -71,13 +83,26 @@ export function Products() {
     }
   }
 
+  function filterByRating(products, filterRating) {
+    switch (filterRating) {
+      case '4_STARS_ABOVE':
+        return [...products].filter(product => product.rating >= 4)
+      case '3_STARS_ABOVE':
+        return [...products].filter(product => product.rating >= 3)
+      case '2_STARS_ABOVE':
+        return [...products].filter(product => product.rating >= 2)
+      case '1_STARS_ABOVE':
+        return [...products].filter(product => product.rating >= 1)
+      default:
+        return products
+    }
+  }
+
   function filterProducts(products, category) {
     let filteredProducts = []
-    const newArray = Object.keys(category)
-    console.log(newArray)
+    const categoryArray = Object.keys(category)
     let flag = false
-    for (const catName of newArray) {
-      console.log(catName)
+    for (const catName of categoryArray) {
       if (category[catName]) {
         flag = true
         const temp = products.filter(
@@ -96,8 +121,9 @@ export function Products() {
     )
   }
   const filteredRange = filterRange(state, rangeLimit)
-  const filteredData = filterProducts(filteredRange, category)
-  const sortedData = sortFn(filteredData, sortBy)
+  const filteredProducts = filterProducts(filteredRange, category)
+  const filteredRating = filterByRating(filteredProducts, rating)
+  const sortedData = sortFn(filteredRating, sortBy)
 
   useEffect(() => {
     ;(async function getData() {
@@ -183,16 +209,36 @@ export function Products() {
             <h5>Rating</h5>
 
             <label className={product['filter__names']}>
-              <input type="radio" name="rating" />4 Stars and above
+              <input
+                type="radio"
+                name="rating"
+                onClick={() => dispatch({ type: '4_STARS_ABOVE' })}
+              />
+              4 Stars and above
             </label>
             <label className={product['filter__names']}>
-              <input type="radio" name="rating" />3 Stars and above
+              <input
+                type="radio"
+                name="rating"
+                onClick={() => dispatch({ type: '3_STARS_ABOVE' })}
+              />
+              3 Stars and above
             </label>
             <label className={product['filter__names']}>
-              <input type="radio" name="rating" />2 Stars and above
+              <input
+                type="radio"
+                name="rating"
+                onClick={() => dispatch({ type: '2_STARS_ABOVE' })}
+              />
+              2 Stars and above
             </label>
             <label className={product['filter__names']}>
-              <input type="radio" name="rating" />1 Stars and above
+              <input
+                type="radio"
+                name="rating"
+                onClick={() => dispatch({ type: '1_STARS_ABOVE' })}
+              />
+              1 Stars and above
             </label>
           </div>
           <div className={`filter__sorting ${product['flex__column']}`}>

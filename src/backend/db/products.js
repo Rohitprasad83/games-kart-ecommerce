@@ -32,7 +32,7 @@ export const products = [{
         oldPrice: 12999,
         discount: '35%',
         categoryName: 'Arcade',
-        rating: 4.1,
+        rating: 3.1,
     },
     {
         _id: uuid(),
@@ -42,7 +42,7 @@ export const products = [{
         oldPrice: 4999,
         discount: '35%',
         categoryName: 'Sports',
-        rating: 4.2,
+        rating: 3.5,
     },
     {
         _id: uuid(),
@@ -52,7 +52,7 @@ export const products = [{
         oldPrice: 2999,
         discount: '45%',
         categoryName: 'Strategy',
-        rating: 4.0,
+        rating: 2.2,
     },
     {
         _id: uuid(),
@@ -62,7 +62,7 @@ export const products = [{
         oldPrice: 7999,
         discount: '30%',
         categoryName: 'Action',
-        rating: 4.5,
+        rating: 3.6,
     },
     {
         _id: uuid(),
@@ -72,7 +72,7 @@ export const products = [{
         oldPrice: 3999,
         discount: '25%',
         categoryName: 'Sports',
-        rating: 4.7,
+        rating: 2.8,
     },
     {
         _id: uuid(),
@@ -82,7 +82,7 @@ export const products = [{
         oldPrice: 6999,
         discount: '25%',
         categoryName: 'Sports',
-        rating: 4.7,
+        rating: 1.4,
     },
     {
         _id: uuid(),
@@ -92,7 +92,7 @@ export const products = [{
         oldPrice: 2999,
         discount: '25%',
         categoryName: 'Arcade',
-        rating: 4.7,
+        rating: 2.9,
     },
     {
         _id: uuid(),
@@ -102,7 +102,7 @@ export const products = [{
         oldPrice: 2999,
         discount: '25%',
         categoryName: 'Strategy',
-        rating: 4.7,
+        rating: 3.7,
     },
     {
         _id: uuid(),
@@ -112,7 +112,7 @@ export const products = [{
         oldPrice: 2999,
         discount: '25%',
         categoryName: 'Adventure',
-        rating: 4.7,
+        rating: 4.8,
     },
     {
         _id: uuid(),
@@ -122,6 +122,6 @@ export const products = [{
         oldPrice: 2999,
         discount: '25%',
         categoryName: 'Arcade',
-        rating: 4.7,
+        rating: 1.9,
     },
 ]
