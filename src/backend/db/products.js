@@ -101,7 +101,7 @@ export const products = [{
         price: 1999,
         oldPrice: 2999,
         discount: '25%',
-        categoryName: 'Arcade',
+        categoryName: 'Strategy',
         rating: 4.7,
     },
     {
@@ -111,7 +111,7 @@ export const products = [{
         price: 1999,
         oldPrice: 2999,
         discount: '25%',
-        categoryName: 'Arcade',
+        categoryName: 'Adventure',
         rating: 4.7,
     },
     {
