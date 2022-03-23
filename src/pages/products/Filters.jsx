@@ -1,23 +1,25 @@
 import { useProductFilter } from '../../context/product-context'
-import product from './Products.module.css'
+import productStyle from './Products.module.css'
 
 function Filters() {
   const { filters, productDispatch } = useProductFilter()
   const { category, rangeLimit, sortBy, rating } = filters
   const { action, adventure, sports, strategy, arcade } = category
   return (
-    <aside className={`${product['filter']} text__md`}>
-      <div className={product['filter__header']}>
+    <aside className={`${productStyle['filter']} text__md`}>
+      <div className={productStyle['filter__header']}>
         <span className="font__bold">Filters</span>
         <button
-          className={product['filter__clear']}
+          className={productStyle['filter__clear']}
           onClick={() => productDispatch({ type: 'ClearAllFilters' })}>
           Clear
         </button>
       </div>
-      <div className={`filter__slider ${product['flex__column']} text__md`}>
+      <div
+        className={`filter__slider ${productStyle['flex__column']} text__md`}>
         <label for="slider">Select your Price</label>
-        <div className={`${product['slider__price']} text__md font__light`}>
+        <div
+          className={`${productStyle['slider__price']} text__md font__light`}>
           <span>1000</span>
           <span>5500</span>
           <span>10000</span>
@@ -38,13 +40,13 @@ function Filters() {
         />
         <div className="slider__output text__md">
           Selected Price is{' '}
-          <span className={product['text__primary']}>₹ {rangeLimit}</span>
+          <span className={productStyle['text__primary']}>₹ {rangeLimit}</span>
         </div>
       </div>
-      <div className={`filter__category ${product['flex__column']}`}>
+      <div className={`filter__category ${productStyle['flex__column']}`}>
         <h5>Category</h5>
 
-        <label className={product['filter__names']}>
+        <label className={productStyle['filter__names']}>
           <input
             type="checkbox"
             checked={action}
@@ -52,7 +54,7 @@ function Filters() {
           />
           Action
         </label>
-        <label className={product['filter__names']}>
+        <label className={productStyle['filter__names']}>
           <input
             type="checkbox"
             checked={arcade}
@@ -60,7 +62,7 @@ function Filters() {
           />
           Arcade
         </label>
-        <label className={product['filter__names']}>
+        <label className={productStyle['filter__names']}>
           <input
             type="checkbox"
             checked={strategy}
@@ -68,7 +70,7 @@ function Filters() {
           />
           Strategy
         </label>
-        <label className={product['filter__names']}>
+        <label className={productStyle['filter__names']}>
           <input
             type="checkbox"
             checked={adventure}
@@ -76,7 +78,7 @@ function Filters() {
           />
           Adventure
         </label>
-        <label className={product['filter__names']}>
+        <label className={productStyle['filter__names']}>
           <input
             type="checkbox"
             checked={sports}
@@ -85,10 +87,10 @@ function Filters() {
           Sports
         </label>
       </div>
-      <div className={`filter__rating ${product['flex__column']}`}>
+      <div className={`filter__rating ${productStyle['flex__column']}`}>
         <h5>Rating</h5>
 
-        <label className={product['filter__names']}>
+        <label className={productStyle['filter__names']}>
           <input
             type="radio"
             name="rating"
@@ -97,7 +99,7 @@ function Filters() {
           />
           4 Stars and above
         </label>
-        <label className={product['filter__names']}>
+        <label className={productStyle['filter__names']}>
           <input
             type="radio"
             name="rating"
@@ -106,7 +108,7 @@ function Filters() {
           />
           3 Stars and above
         </label>
-        <label className={product['filter__names']}>
+        <label className={productStyle['filter__names']}>
           <input
             type="radio"
             name="rating"
@@ -115,7 +117,7 @@ function Filters() {
           />
           2 Stars and above
         </label>
-        <label className={product['filter__names']}>
+        <label className={productStyle['filter__names']}>
           <input
             type="radio"
             name="rating"
@@ -125,9 +127,9 @@ function Filters() {
           1 Stars and above
         </label>
       </div>
-      <div className={`filter__sorting ${product['flex__column']}`}>
+      <div className={`filter__sorting ${productStyle['flex__column']}`}>
         <h5>Sort By</h5>
-        <label className={product['filter__names']}>
+        <label className={productStyle['filter__names']}>
           <input
             type="radio"
             name="sorting"
@@ -136,7 +138,7 @@ function Filters() {
           />
           Price: Low to High
         </label>
-        <label className={product['filter__names']}>
+        <label className={productStyle['filter__names']}>
           <input
             type="radio"
             name="sorting"
