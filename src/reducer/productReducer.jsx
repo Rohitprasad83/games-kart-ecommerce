@@ -39,6 +39,21 @@ function productReducer(state, action) {
         ...state,
         category: { ...state.category, adventure: !state.category.adventure },
       }
+    case 'ClearAllFilters':
+      return {
+        ...state,
+        category: {
+          ...state.category,
+          action: false,
+          adventure: false,
+          arcade: false,
+          strategy: false,
+          sports: false,
+        },
+        sortBy: null,
+        rangeLimit: 10000,
+        rating: null,
+      }
     default:
       return { ...state }
   }
