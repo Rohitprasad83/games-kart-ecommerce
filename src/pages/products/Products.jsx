@@ -1,8 +1,9 @@
 import { Navbar } from '../../components/navbar/Navbar.jsx'
 import product from './Products.module.css'
 import { ProductCard } from './ProductCard'
-import React, { useState, useEffect, useReducer } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { useProductFilter } from '../../context/product-context'
 import {
   sortByPrice,
   filterProductsByCategory,
@@ -11,69 +12,8 @@ import {
 } from '../../utils/productUtils/index'
 export function Products() {
   const [state, setState] = useState([])
-  function reduceFn(state, action) {
-    if (action.type === 'Action')
-      return {
-        ...state,
-        category: { ...state.category, action: !state.category.action },
-      }
-    if (action.type === 'Adventure')
-      return {
-        ...state,
-        category: { ...state.category, adventure: !state.category.adventure },
-      }
-    if (action.type === 'Strategy')
-      return {
-        ...state,
-        category: { ...state.category, strategy: !state.category.strategy },
-      }
-    if (action.type === 'Arcade')
-      return {
-        ...state,
-        category: { ...state.category, arcade: !state.category.arcade },
-      }
-    if (action.type === 'Sports')
-      return {
-        ...state,
-        category: { ...state.category, sports: !state.category.sports },
-      }
-    if (action.type === 'PRICE_RANGE') {
-      return { ...state, rangeLimit: parseInt(action.payload, 10) }
-    }
-
-    switch (action.type) {
-      case 'LOW_TO_HIGH':
-        return { ...state, sortBy: 'LOW_TO_HIGH' }
-      case 'HIGH_TO_LOW':
-        return { ...state, sortBy: 'HIGH_TO_LOW' }
-      case '4_STARS_ABOVE':
-        return { ...state, rating: '4_STARS_ABOVE' }
-      case '3_STARS_ABOVE':
-        return { ...state, rating: '3_STARS_ABOVE' }
-      case '2_STARS_ABOVE':
-        return { ...state, rating: '2_STARS_ABOVE' }
-      case '1_STARS_ABOVE':
-        return { ...state, rating: '1_STARS_ABOVE' }
-      default:
-        return { ...state }
-    }
-  }
-  const [{ category, sortBy, rangeLimit, rating }, dispatch] = useReducer(
-    reduceFn,
-    {
-      category: {
-        action: false,
-        adventure: false,
-        arcade: false,
-        strategy: false,
-        sports: false,
-      },
-      sortBy: null,
-      rangeLimit: 10000,
-      rating: null,
-    }
-  )
-
+  const { filters, productDispatch } = useProductFilter()
+  const { category, rangeLimit, sortBy, rating } = filters
   const filteredRange = filterByRange(state, rangeLimit)
   const filteredProducts = filterProductsByCategory(filteredRange, category)
   const filteredRating = filterProductsByRating(filteredProducts, rating)
@@ -112,7 +52,10 @@ export function Products() {
               value={rangeLimit}
               className="slider"
               onChange={e =>
-                dispatch({ type: 'PRICE_RANGE', payload: e.target.value })
+                productDispatch({
+                  type: 'PRICE_RANGE',
+                  payload: e.target.value,
+                })
               }
             />
             <div className="slider__output text__md">
@@ -126,35 +69,35 @@ export function Products() {
             <label className={product['filter__names']}>
               <input
                 type="checkbox"
-                onClick={() => dispatch({ type: 'Action' })}
+                onClick={() => productDispatch({ type: 'Action' })}
               />
               Action
             </label>
             <label className={product['filter__names']}>
               <input
                 type="checkbox"
-                onClick={() => dispatch({ type: 'Arcade' })}
+                onClick={() => productDispatch({ type: 'Arcade' })}
               />
               Arcade
             </label>
             <label className={product['filter__names']}>
               <input
                 type="checkbox"
-                onClick={() => dispatch({ type: 'Strategy' })}
+                onClick={() => productDispatch({ type: 'Strategy' })}
               />
               Strategy
             </label>
             <label className={product['filter__names']}>
               <input
                 type="checkbox"
-                onClick={() => dispatch({ type: 'Adventure' })}
+                onClick={() => productDispatch({ type: 'Adventure' })}
               />
               Adventure
             </label>
             <label className={product['filter__names']}>
               <input
                 type="checkbox"
-                onClick={() => dispatch({ type: 'Sports' })}
+                onClick={() => productDispatch({ type: 'Sports' })}
               />
               Sports
             </label>
@@ -166,7 +109,7 @@ export function Products() {
               <input
                 type="radio"
                 name="rating"
-                onClick={() => dispatch({ type: '4_STARS_ABOVE' })}
+                onClick={() => productDispatch({ type: '4_STARS_ABOVE' })}
               />
               4 Stars and above
             </label>
@@ -174,7 +117,7 @@ export function Products() {
               <input
                 type="radio"
                 name="rating"
-                onClick={() => dispatch({ type: '3_STARS_ABOVE' })}
+                onClick={() => productDispatch({ type: '3_STARS_ABOVE' })}
               />
               3 Stars and above
             </label>
@@ -182,7 +125,7 @@ export function Products() {
               <input
                 type="radio"
                 name="rating"
-                onClick={() => dispatch({ type: '2_STARS_ABOVE' })}
+                onClick={() => productDispatch({ type: '2_STARS_ABOVE' })}
               />
               2 Stars and above
             </label>
@@ -190,7 +133,7 @@ export function Products() {
               <input
                 type="radio"
                 name="rating"
-                onClick={() => dispatch({ type: '1_STARS_ABOVE' })}
+                onClick={() => productDispatch({ type: '1_STARS_ABOVE' })}
               />
               1 Stars and above
             </label>
@@ -201,7 +144,7 @@ export function Products() {
               <input
                 type="radio"
                 name="sorting"
-                onClick={() => dispatch({ type: 'LOW_TO_HIGH' })}
+                onClick={() => productDispatch({ type: 'LOW_TO_HIGH' })}
               />
               Price: Low to High
             </label>
@@ -209,7 +152,7 @@ export function Products() {
               <input
                 type="radio"
                 name="sorting"
-                onClick={() => dispatch({ type: 'HIGH_TO_LOW' })}
+                onClick={() => productDispatch({ type: 'HIGH_TO_LOW' })}
               />
               Price: High to Low
             </label>
