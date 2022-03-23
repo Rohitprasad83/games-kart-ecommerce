@@ -12,11 +12,11 @@ import {
   filterProductsByRating,
 } from '../../utils/productUtils/index'
 export function Products() {
-  const [state, setState] = useState([])
+  const [products, setProducts] = useState([])
   const { filters } = useProductFilter()
   const { category, rangeLimit, sortBy, rating } = filters
 
-  const filteredRange = filterByRange(state, rangeLimit)
+  const filteredRange = filterByRange(products, rangeLimit)
   const filteredProducts = filterProductsByCategory(filteredRange, category)
   const filteredRating = filterProductsByRating(filteredProducts, rating)
   const sortedData = sortByPrice(filteredRating, sortBy)
@@ -26,7 +26,7 @@ export function Products() {
       const {
         data: { products },
       } = await axios.get('/api/products')
-      setState(products)
+      setProducts(products)
     })()
   }, [])
   return (
