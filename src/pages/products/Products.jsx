@@ -3,7 +3,12 @@ import product from './Products.module.css'
 import { ProductCard } from './ProductCard'
 import React, { useState, useEffect, useReducer } from 'react'
 import axios from 'axios'
-
+import {
+  sortByPrice,
+  filterProductsByCategory,
+  filterByRange,
+  filterProductsByRating,
+} from '../../utils/productUtils/index'
 export function Products() {
   const [state, setState] = useState([])
   function reduceFn(state, action) {
@@ -68,75 +73,11 @@ export function Products() {
       rating: null,
     }
   )
-  function sortFn(products, sortBy) {
-    switch (sortBy) {
-      case 'LOW_TO_HIGH':
-        return [...products].sort(
-          (firstItem, secondItem) => firstItem['price'] - secondItem['price']
-        )
-      case 'HIGH_TO_LOW':
-        return [...products].sort(
-          (firstItem, secondItem) => secondItem['price'] - firstItem['price']
-        )
-      default:
-        return products
-    }
-  }
 
-  function sortRatingInDescending(products) {
-    return [...products].sort(
-      (firstItem, secondItem) => secondItem.rating - firstItem.rating
-    )
-  }
-  function filterByRating(products, filterRating) {
-    switch (filterRating) {
-      case '4_STARS_ABOVE':
-        return sortRatingInDescending(
-          [...products].filter(product => product.rating >= 4)
-        )
-      case '3_STARS_ABOVE':
-        return sortRatingInDescending(
-          [...products].filter(product => product.rating >= 3)
-        )
-      case '2_STARS_ABOVE':
-        return sortRatingInDescending(
-          [...products].filter(product => product.rating >= 2)
-        )
-      case '1_STARS_ABOVE':
-        return sortRatingInDescending(
-          [...products].filter(product => product.rating >= 1)
-        )
-      default:
-        return products
-    }
-  }
-
-  function filterProducts(products, category) {
-    let filteredProducts = []
-    const categoryArray = Object.keys(category)
-    let flag = false
-    for (const catName of categoryArray) {
-      if (category[catName]) {
-        flag = true
-        const temp = products.filter(
-          ({ categoryName }) =>
-            categoryName.toLowerCase() === catName.toLowerCase()
-        )
-        filteredProducts = [...filteredProducts, ...temp]
-      }
-    }
-    return flag ? filteredProducts : products
-  }
-
-  function filterRange(products, rangeLimit) {
-    return products.filter(product =>
-      product['price'] <= rangeLimit ? product : false
-    )
-  }
-  const filteredRange = filterRange(state, rangeLimit)
-  const filteredProducts = filterProducts(filteredRange, category)
-  const filteredRating = filterByRating(filteredProducts, rating)
-  const sortedData = sortFn(filteredRating, sortBy)
+  const filteredRange = filterByRange(state, rangeLimit)
+  const filteredProducts = filterProductsByCategory(filteredRange, category)
+  const filteredRating = filterProductsByRating(filteredProducts, rating)
+  const sortedData = sortByPrice(filteredRating, sortBy)
 
   useEffect(() => {
     ;(async function getData() {
