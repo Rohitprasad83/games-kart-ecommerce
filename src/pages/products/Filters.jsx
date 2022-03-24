@@ -1,10 +1,11 @@
-import { useProductFilter } from '../../context/product-context'
+import { useProductFilter } from '../../context'
 import productStyle from './Products.module.css'
 
 function Filters() {
   const { filters, productDispatch } = useProductFilter()
   const { category, rangeLimit, sortBy, rating } = filters
   const { action, adventure, sports, strategy, arcade } = category
+
   return (
     <aside className={`${productStyle['filter']} text__md`}>
       <div className={productStyle['filter__header']}>
