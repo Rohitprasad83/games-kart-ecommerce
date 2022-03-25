@@ -1,4 +1,6 @@
+import { useEffect } from 'react'
 import productStyle from './Products.module.css'
+import { useWishlistContext } from '../../context/index'
 
 export function ProductCard({
   _id,
@@ -10,11 +12,32 @@ export function ProductCard({
   categoryName,
   rating,
 }) {
+  const { wishlistItems, setWishlistItems } = useWishlistContext()
+  useEffect(() => {
+    console.log(wishlistItems)
+  }, [wishlistItems])
+  const item = {
+    _id,
+    title,
+    img,
+    price,
+    oldPrice,
+    discount,
+    categoryName,
+    rating,
+  }
+  function addWishlistItem() {
+    for (let i = 0; i < wishlistItems.length; i++) {
+      if (item._id === wishlistItems[i]._id)
+        return setWishlistItems(
+          wishlistItems.filter(product => item._id !== product._id)
+        )
+    }
+    setWishlistItems([...wishlistItems, item])
+  }
   return (
     <div className={`${productStyle['card']} card__shadow`}>
-      <span className="card__icon right">
-        <i className="far fa-heart"></i>
-      </span>
+      <span className="card__icon right">{<i className></i>}</span>
 
       <span className={productStyle['card__image']}>
         <img src={img} alt={title} />
@@ -36,7 +59,9 @@ export function ProductCard({
         </div>
 
         <div className={productStyle['card__buttons']}>
-          <button className={`btn btn__primary ${productStyle['btn']}`}>
+          <button
+            className={`btn btn__primary ${productStyle['btn']}`}
+            onClick={addWishlistItem}>
             Add to Cart
           </button>
         </div>

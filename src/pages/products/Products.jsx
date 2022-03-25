@@ -5,6 +5,7 @@ import { Filters } from './Filters'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useProductFilter } from '../../context/product-context'
+
 import {
   sortByPrice,
   filterProductsByCategory,
