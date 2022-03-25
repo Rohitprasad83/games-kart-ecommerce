@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import productStyle from './Products.module.css'
 import { useWishlistContext } from '../../context/index'
 
@@ -13,9 +13,9 @@ export function ProductCard({
   rating,
 }) {
   const { wishlistItems, setWishlistItems } = useWishlistContext()
-  useEffect(() => {
-    console.log(wishlistItems)
-  }, [wishlistItems])
+  // useEffect(() => {
+  //   console.log(wishlistItems)
+  // }, [wishlistItems])
   const item = {
     _id,
     title,
@@ -35,9 +35,23 @@ export function ProductCard({
     }
     setWishlistItems([...wishlistItems, item])
   }
+
+  function containsInWishlist(_id) {
+    return wishlistItems.some(product => product._id === _id)
+  }
+
   return (
     <div className={`${productStyle['card']} card__shadow`}>
-      <span className="card__icon right">{<i className></i>}</span>
+      <span className="card__icon right">
+        {
+          <i
+            className={
+              containsInWishlist(_id)
+                ? 'fas fa-heart text__pink'
+                : 'far fa-heart '
+            }></i>
+        }
+      </span>
 
       <span className={productStyle['card__image']}>
         <img src={img} alt={title} />
