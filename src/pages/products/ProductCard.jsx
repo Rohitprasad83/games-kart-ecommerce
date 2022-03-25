@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import productStyle from './Products.module.css'
 import { useWishlistContext } from '../../context/index'
 
@@ -13,9 +12,6 @@ export function ProductCard({
   rating,
 }) {
   const { wishlistItems, setWishlistItems } = useWishlistContext()
-  // useEffect(() => {
-  //   console.log(wishlistItems)
-  // }, [wishlistItems])
   const item = {
     _id,
     title,
@@ -42,7 +38,7 @@ export function ProductCard({
 
   return (
     <div className={`${productStyle['card']} card__shadow`}>
-      <span className="card__icon right">
+      <span className="card__icon right" onClick={addWishlistItem}>
         {
           <i
             className={
@@ -73,9 +69,7 @@ export function ProductCard({
         </div>
 
         <div className={productStyle['card__buttons']}>
-          <button
-            className={`btn btn__primary ${productStyle['btn']}`}
-            onClick={addWishlistItem}>
+          <button className={`btn btn__primary ${productStyle['btn']}`}>
             Add to Cart
           </button>
         </div>
