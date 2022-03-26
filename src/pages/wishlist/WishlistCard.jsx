@@ -41,6 +41,15 @@ export function WishlistCard(product) {
           <span className="card__details__price__old">₹{oldPrice}</span>
           <span className="card__details__discount">{discount}% off</span>
         </span>
+
+        <div className={`text__left text__md ${wishlist['card__info']}`}>
+          <span className="font__bold">{categoryName}</span>
+          <span>
+            {rating}
+            <i className={`fas fa-star ${wishlist['star']}`}></i>
+          </span>
+        </div>
+
         <div className="card__buttons">
           <button className={`btn btn__primary ${wishlist['btn']}`}>
             Move to Cart

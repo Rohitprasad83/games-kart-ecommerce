@@ -5,7 +5,7 @@ import { useWishlistContext } from '../../context/index.jsx'
 import { Link } from 'react-router-dom'
 
 export function Wishlist() {
-  const { wishlistItems, setWishlistItems } = useWishlistContext()
+  const { wishlistItems } = useWishlistContext()
   return (
     <div className="home__container">
       <Navbar />
@@ -28,7 +28,8 @@ export function Wishlist() {
                 </Link>
               </div>
             ) : (
-              <p className="text__lg font__bold text__center">
+              <p
+                className={`text__lg font__bold text__center ${wishlist['items__count']}`}>
                 No of items in wish List {wishlistItems.length}
               </p>
             )}
