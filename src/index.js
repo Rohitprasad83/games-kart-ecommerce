@@ -15,9 +15,9 @@ ReactDOM.render(
       <WishlistProvider>
         <ProductFilterProvider>
           <App />
-        </ProductFilterProvider>{' '}
-      </WishlistProvider>{' '}
-    </BrowserRouter>{' '}
+        </ProductFilterProvider>
+      </WishlistProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 )

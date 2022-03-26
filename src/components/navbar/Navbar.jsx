@@ -22,8 +22,7 @@ export function Navbar() {
             <Link to="/wishlist">
               <i className="fa-regular fa-heart icon"> </i>
               <span className="badge__number badge__primary">
-                {' '}
-                {wishlistItems.length}{' '}
+                {wishlistItems.length}
               </span>
             </Link>
           </span>
