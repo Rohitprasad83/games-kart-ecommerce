@@ -1,6 +1,6 @@
 import productStyle from './Products.module.css'
 import { useWishlistContext } from '../../context/index'
-
+// import { addWishlistItem } from '../wishlist/addProductToWishlist'
 export function ProductCard({
   _id,
   title,
@@ -31,7 +31,6 @@ export function ProductCard({
     }
     setWishlistItems([...wishlistItems, item])
   }
-
   function containsInWishlist(_id) {
     return wishlistItems.some(product => product._id === _id)
   }
