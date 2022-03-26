@@ -1,46 +1,25 @@
 import productStyle from './Products.module.css'
 import { useWishlistContext } from '../../context/index'
-export function ProductCard({
-  _id,
-  title,
-  img,
-  price,
-  oldPrice,
-  discount,
-  categoryName,
-  rating,
-}) {
+import {
+  addWishlistItem,
+  containsInWishlist,
+} from '../../utils/wishlistUtils/index.jsx'
+export function ProductCard({ product }) {
   const { wishlistItems, setWishlistItems } = useWishlistContext()
-  const item = {
-    _id,
-    title,
-    img,
-    price,
-    oldPrice,
-    discount,
-    categoryName,
-    rating,
-  }
-  function addWishlistItem() {
-    for (let i = 0; i < wishlistItems.length; i++) {
-      if (item._id === wishlistItems[i]._id)
-        return setWishlistItems(
-          wishlistItems.filter(product => item._id !== product._id)
-        )
-    }
-    setWishlistItems([...wishlistItems, item])
-  }
-  function containsInWishlist(_id) {
-    return wishlistItems.some(product => product._id === _id)
-  }
+  const { _id, title, img, price, oldPrice, discount, categoryName, rating } =
+    product
 
   return (
     <div className={`${productStyle['card']} card__shadow`}>
-      <span className="card__icon right" onClick={addWishlistItem}>
+      <span
+        className="card__icon right"
+        onClick={() =>
+          addWishlistItem(product, wishlistItems, setWishlistItems)
+        }>
         {
           <i
             className={
-              containsInWishlist(_id)
+              containsInWishlist(_id, wishlistItems)
                 ? 'fas fa-heart text__pink'
                 : 'far fa-heart '
             }></i>

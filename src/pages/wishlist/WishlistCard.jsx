@@ -1,31 +1,26 @@
 import wishlist from './Wishlist.module.css'
 import { useWishlistContext } from '../../context/index'
-
+import {
+  addWishlistItem,
+  containsInWishlist,
+} from '../../utils/wishlistUtils/index.jsx'
 export function WishlistCard(product) {
   const { wishlistItems, setWishlistItems } = useWishlistContext()
 
   const { _id, title, img, price, oldPrice, discount, categoryName, rating } =
     product
 
-  function addWishlistItem() {
-    for (let i = 0; i < wishlistItems.length; i++) {
-      if (product._id === wishlistItems[i]._id)
-        return setWishlistItems(
-          wishlistItems.filter(({ _id }) => _id !== product._id)
-        )
-    }
-    setWishlistItems([...wishlistItems, product])
-  }
-  function containsInWishlist(_id) {
-    return wishlistItems.some(product => product._id === _id)
-  }
   return (
     <div className="card card__shadow">
-      <span className="card__icon right" onClick={addWishlistItem}>
+      <span
+        className="card__icon right"
+        onClick={() =>
+          addWishlistItem(product, wishlistItems, setWishlistItems)
+        }>
         {
           <i
             className={
-              containsInWishlist(_id)
+              containsInWishlist(_id, wishlistItems)
                 ? 'fas fa-heart text__pink'
                 : 'far fa-heart '
             }></i>
