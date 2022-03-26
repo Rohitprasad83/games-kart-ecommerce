@@ -38,7 +38,7 @@ export function Wishlist() {
 
         <div className={wishlist['wishlist__container']}>
           {wishlistItems.map(product => (
-            <WishlistCard key={product['id']} {...product} />
+            <WishlistCard key={product._id} {...product} />
           ))}
         </div>
       </div>

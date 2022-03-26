@@ -38,7 +38,7 @@ export function Products() {
         <Filters />
         <main className={product['products__container']}>
           {sortedData.map(product => (
-            <ProductCard key={product['id']} {...product} />
+            <ProductCard key={product._id} product={product} />
           ))}
         </main>
       </div>
