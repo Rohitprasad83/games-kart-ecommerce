@@ -25,6 +25,12 @@
     justify-content: center;
 }
 
+.flex__column {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
 @media only screen and (max-width: 640px) {
      :root {
         font-size: 55%;

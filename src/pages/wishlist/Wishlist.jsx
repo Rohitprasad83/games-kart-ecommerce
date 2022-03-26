@@ -2,7 +2,8 @@ import { Navbar } from '../../components/navbar/Navbar.jsx'
 import wishlist from './Wishlist.module.css'
 import { WishlistCard } from './WishlistCard'
 import { useWishlistContext } from '../../context/index.jsx'
-// import { ProductCard } from '../products/ProductCard'
+import { Link } from 'react-router-dom'
+
 export function Wishlist() {
   const { wishlistItems, setWishlistItems } = useWishlistContext()
   return (
@@ -16,8 +17,21 @@ export function Wishlist() {
         </h3>
         {
           <div className="text__lg font__bold text__center">
-            {' '}
-            No of items in wish List {wishlistItems.length}
+            {wishlistItems.length === 0 ? (
+              <div className={wishlist['flex__column']}>
+                <div>Your Wishlist is Empty</div>
+                <div>Add Products to Your Wishlist</div>
+                <Link to="/products" className="text__xl">
+                  <button className="btn btn__primary text__lg">
+                    Shop Now
+                  </button>
+                </Link>
+              </div>
+            ) : (
+              <p className="text__lg font__bold text__center">
+                No of items in wish List {wishlistItems.length}
+              </p>
+            )}
           </div>
         }
 
