@@ -1,8 +1,8 @@
 import { Navbar } from '../../components/navbar/Navbar.jsx'
 import wishlist from './Wishlist.module.css'
-// import { WishlistCard } from './WishlistCard'
+import { WishlistCard } from './WishlistCard'
 import { useWishlistContext } from '../../context/index.jsx'
-import { ProductCard } from '../products/ProductCard'
+// import { ProductCard } from '../products/ProductCard'
 export function Wishlist() {
   const { wishlistItems, setWishlistItems } = useWishlistContext()
   return (
@@ -23,7 +23,7 @@ export function Wishlist() {
 
         <div className={wishlist['wishlist__container']}>
           {wishlistItems.map(product => (
-            <ProductCard key={product['id']} {...product} />
+            <WishlistCard key={product['id']} {...product} />
           ))}
         </div>
       </div>
