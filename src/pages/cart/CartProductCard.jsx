@@ -25,6 +25,7 @@ function CartProductCard({ cartProduct: product }) {
         <div className={`${cartStyle['card__quantity']} text__md`}>
           <label for="quantity">Quantity:</label>
           <button
+            className={cartStyle['quantity__btn']}
             onClick={() =>
               cartDispatch({ type: 'INCREASE_QUANTITY', payload: _id })
             }>
@@ -32,6 +33,7 @@ function CartProductCard({ cartProduct: product }) {
           </button>
           <div>{quantity}</div>
           <button
+            className={cartStyle['quantity__btn']}
             onClick={() =>
               cartDispatch({ type: 'DECREASE_QUANTITY', payload: _id })
             }>
