@@ -1,11 +1,13 @@
 import wishlist from './Wishlist.module.css'
-import { useWishlistContext } from '../../context/index'
+import { useWishlistContext, useCart } from '../../context/index'
+import { Link } from 'react-router-dom'
 import {
   addWishlistItem,
   containsInWishlist,
 } from '../../utils/wishlistUtils/index.jsx'
 export function WishlistCard(product) {
   const { wishlistItems, setWishlistItems } = useWishlistContext()
+  const { cartItems, cartDispatch } = useCart()
 
   const { _id, title, img, price, oldPrice, discount, categoryName, rating } =
     product
@@ -46,9 +48,21 @@ export function WishlistCard(product) {
         </div>
 
         <div className="card__buttons">
-          <button className={`btn btn__primary ${wishlist['btn']}`}>
-            Move to Cart
-          </button>
+          {cartItems.products.some(item => item._id === _id) ? (
+            <Link
+              to="/cart"
+              className={`btn btn__secondary ${wishlist['btn']}`}>
+              <button to="/cart">Go to Cart</button>
+            </Link>
+          ) : (
+            <button
+              className={`btn btn__primary ${wishlist['btn']}`}
+              onClick={() =>
+                cartDispatch({ type: 'ADD_TO_CART', payload: product })
+              }>
+              Add to Cart
+            </button>
+          )}
         </div>
       </div>
     </div>
