@@ -6,7 +6,12 @@ function cartReducer(state, action) {
         products: [...state.products, { ...action.payload, quantity: 1 }],
       }
     case 'REMOVE_FROM_CART':
-      return { ...state }
+      return {
+        ...state,
+        products: state.products.filter(
+          product => product._id !== action.payload
+        ),
+      }
     default:
       return { ...state }
   }
