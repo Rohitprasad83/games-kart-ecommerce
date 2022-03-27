@@ -1,7 +1,8 @@
 import './Navbar.css'
 import { Link } from 'react-router-dom'
-import { useWishlistContext } from '../../context/index.jsx'
+import { useWishlistContext, useCart } from '../../context/index.jsx'
 export function Navbar() {
+  const { cartItems } = useCart()
   const { wishlistItems } = useWishlistContext()
   return (
     <nav className="navbar simple">
@@ -31,7 +32,9 @@ export function Navbar() {
           <span className="badge__icons">
             <Link to="/cart">
               <i className="fa-solid fa-cart-shopping icon"> </i>
-              <span className="badge__number badge__primary"> 5 </span>
+              <span className="badge__number badge__primary">
+                {cartItems.products.length}
+              </span>
             </Link>
           </span>
         </li>
