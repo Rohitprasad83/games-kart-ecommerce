@@ -1,12 +1,12 @@
 import { Navbar } from '../../components/navbar/Navbar.jsx'
-import { useWishlistContext, useCart } from '../../context/index'
+import { useCart } from '../../context/index'
 import { CartProductCard } from './CartProductCard'
 import { Link } from 'react-router-dom'
 import cartStyle from './Cart.module.css'
 
 export function Cart() {
-  const { cartItems, cartDispatch } = useCart()
-  const price = (total, curr) => curr.price + total
+  const { cartItems } = useCart()
+  const price = (total, curr) => curr.price * curr.quantity + total
   const totalPrice = cartItems.products.reduce(price, 0)
   const totalDiscount = Math.floor(totalPrice * 0.1)
   return (
@@ -46,7 +46,9 @@ export function Cart() {
             <hr />
             <h5 className={cartStyle['cart__details']}>
               Total Amount
-              <span className="text__lg">₹{totalPrice - totalDiscount}</span>
+              <span className="text__lg">
+                ₹{totalPrice - totalDiscount - 499}
+              </span>
             </h5>
             <hr />
             <div className="text__md">

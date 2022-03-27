@@ -8,7 +8,7 @@ function CartProductCard({ cartProduct: product }) {
   const { cartDispatch } = useCart()
   const { wishlistItems, setWishlistItems } = useWishlistContext()
 
-  const { _id, title, img, price, oldPrice, discount } = product
+  const { _id, title, img, price, oldPrice, discount, quantity } = product
   return (
     <div
       className={`card card__horizontal card__shadow ${cartStyle['card__horizontal']}`}>
@@ -24,13 +24,19 @@ function CartProductCard({ cartProduct: product }) {
         </div>
         <div className={`${cartStyle['card__quantity']} text__md`}>
           <label for="quantity">Quantity:</label>
-          <select id="cars" name="cars">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
+          <button
+            onClick={() =>
+              cartDispatch({ type: 'INCREASE_QUANTITY', payload: _id })
+            }>
+            +
+          </button>
+          <div>{quantity}</div>
+          <button
+            onClick={() =>
+              cartDispatch({ type: 'DECREASE_QUANTITY', payload: _id })
+            }>
+            -
+          </button>
         </div>
         <hr />
         <div className={`card__buttons ${cartStyle['card__buttons']}`}>
