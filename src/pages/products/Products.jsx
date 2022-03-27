@@ -5,6 +5,7 @@ import { Filters } from './Filters'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useProductFilter } from '../../context/product-context'
+
 import {
   sortByPrice,
   filterProductsByCategory,
@@ -37,7 +38,7 @@ export function Products() {
         <Filters />
         <main className={product['products__container']}>
           {sortedData.map(product => (
-            <ProductCard key={product['id']} {...product} />
+            <ProductCard key={product._id} product={product} />
           ))}
         </main>
       </div>

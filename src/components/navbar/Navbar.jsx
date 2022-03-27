@@ -1,6 +1,8 @@
 import './Navbar.css'
 import { Link } from 'react-router-dom'
+import { useWishlistContext } from '../../context/index.jsx'
 export function Navbar() {
+  const { wishlistItems } = useWishlistContext()
   return (
     <nav className="navbar simple">
       <Link to="/">
@@ -19,7 +21,9 @@ export function Navbar() {
           <span className="badge__icons">
             <Link to="/wishlist">
               <i className="fa-regular fa-heart icon"> </i>
-              <span className="badge__number badge__primary"> 5 </span>
+              <span className="badge__number badge__primary">
+                {wishlistItems.length}
+              </span>
             </Link>
           </span>
         </li>

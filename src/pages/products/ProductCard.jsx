@@ -1,19 +1,29 @@
 import productStyle from './Products.module.css'
+import { useWishlistContext } from '../../context/index'
+import {
+  addWishlistItem,
+  containsInWishlist,
+} from '../../utils/wishlistUtils/index.jsx'
+export function ProductCard({ product }) {
+  const { wishlistItems, setWishlistItems } = useWishlistContext()
+  const { _id, title, img, price, oldPrice, discount, categoryName, rating } =
+    product
 
-export function ProductCard({
-  _id,
-  title,
-  img,
-  price,
-  oldPrice,
-  discount,
-  categoryName,
-  rating,
-}) {
   return (
     <div className={`${productStyle['card']} card__shadow`}>
-      <span className="card__icon right">
-        <i className="far fa-heart"></i>
+      <span
+        className="card__icon right"
+        onClick={() =>
+          addWishlistItem(product, wishlistItems, setWishlistItems)
+        }>
+        {
+          <i
+            className={
+              containsInWishlist(_id, wishlistItems)
+                ? 'fas fa-heart text__pink'
+                : 'far fa-heart '
+            }></i>
+        }
       </span>
 
       <span className={productStyle['card__image']}>

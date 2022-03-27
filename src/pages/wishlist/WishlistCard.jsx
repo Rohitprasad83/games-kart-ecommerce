@@ -1,22 +1,50 @@
 import wishlist from './Wishlist.module.css'
-import { image } from '../../assets/images/index'
+import { useWishlistContext } from '../../context/index'
+import {
+  addWishlistItem,
+  containsInWishlist,
+} from '../../utils/wishlistUtils/index.jsx'
+export function WishlistCard(product) {
+  const { wishlistItems, setWishlistItems } = useWishlistContext()
 
-export function WishlistCard() {
+  const { _id, title, img, price, oldPrice, discount, categoryName, rating } =
+    product
+
   return (
     <div className="card card__shadow">
-      <span className="card__icon right">
-        <i className="fas fa-heart heart"></i>
+      <span
+        className="card__icon right"
+        onClick={() =>
+          addWishlistItem(product, wishlistItems, setWishlistItems)
+        }>
+        {
+          <i
+            className={
+              containsInWishlist(_id, wishlistItems)
+                ? 'fas fa-heart text__pink'
+                : 'far fa-heart '
+            }></i>
+        }
       </span>
       <span className={wishlist['card__image']}>
-        <img src={image} alt="card Image" />
+        <img src={img} alt={title} />
       </span>
       <div className="card__footer">
-        <span className="card__title">Super Mario</span>
+        <span className="card__title">{title}</span>
         <span className="card__details">
-          <span className="card__details__price__new">₹2999</span>
-          <span className="card__details__price__old">₹3999</span>
-          <span className="card__details__discount">25% off</span>
+          <span className="card__details__price__new">₹{price}</span>
+          <span className="card__details__price__old">₹{oldPrice}</span>
+          <span className="card__details__discount">{discount}% off</span>
         </span>
+
+        <div className={`text__left text__md ${wishlist['card__info']}`}>
+          <span className="font__bold">{categoryName}</span>
+          <span>
+            {rating}
+            <i className={`fas fa-star ${wishlist['star']}`}></i>
+          </span>
+        </div>
+
         <div className="card__buttons">
           <button className={`btn btn__primary ${wishlist['btn']}`}>
             Move to Cart
