@@ -1,8 +1,13 @@
 import { useWishlistContext, useCart } from '../../context/index'
 import cartStyle from './Cart.module.css'
-
+import {
+  addWishlistItem,
+  containsInWishlist,
+} from '../../utils/wishlistUtils/index.jsx'
 function CartProductCard({ cartProduct: product }) {
   const { cartDispatch } = useCart()
+  const { wishlistItems, setWishlistItems } = useWishlistContext()
+
   const { _id, title, img, price, oldPrice, discount } = product
   return (
     <div
@@ -36,9 +41,19 @@ function CartProductCard({ cartProduct: product }) {
             }>
             Remove from Cart
           </button>
-          <button className={`btn btn__primary ${cartStyle['btn']}`}>
-            Move to wish list
-          </button>
+          {containsInWishlist(_id, wishlistItems) ? (
+            <button className={`btn btn__primary ${cartStyle['btn']}`}>
+              Added to WishList
+            </button>
+          ) : (
+            <button
+              className={`btn btn__primary ${cartStyle['btn']}`}
+              onClick={() =>
+                addWishlistItem(product, wishlistItems, setWishlistItems)
+              }>
+              Move to WishList
+            </button>
+          )}
         </div>
       </div>
     </div>
