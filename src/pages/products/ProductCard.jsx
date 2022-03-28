@@ -1,14 +1,15 @@
+import { Link } from 'react-router-dom'
 import productStyle from './Products.module.css'
-import { useWishlistContext } from '../../context/index'
+import { useWishlistContext, useCart } from '../../context/index'
 import {
   addWishlistItem,
   containsInWishlist,
 } from '../../utils/wishlistUtils/index.jsx'
 export function ProductCard({ product }) {
   const { wishlistItems, setWishlistItems } = useWishlistContext()
+  const { cartItems, cartDispatch } = useCart()
   const { _id, title, img, price, oldPrice, discount, categoryName, rating } =
     product
-
   return (
     <div className={`${productStyle['card']} card__shadow`}>
       <span
@@ -46,9 +47,21 @@ export function ProductCard({ product }) {
         </div>
 
         <div className={productStyle['card__buttons']}>
-          <button className={`btn btn__primary ${productStyle['btn']}`}>
-            Add to Cart
-          </button>
+          {cartItems.products.some(item => item._id === _id) ? (
+            <Link to="/cart">
+              <button className={`btn btn__secondary ${productStyle['btn']}`}>
+                Go to Cart
+              </button>
+            </Link>
+          ) : (
+            <button
+              className={`btn btn__primary ${productStyle['btn']}`}
+              onClick={() =>
+                cartDispatch({ type: 'ADD_TO_CART', payload: product })
+              }>
+              Add to Cart
+            </button>
+          )}
         </div>
       </div>
     </div>

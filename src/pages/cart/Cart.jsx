@@ -1,71 +1,82 @@
-import { image } from '../../assets/images/index'
 import { Navbar } from '../../components/navbar/Navbar.jsx'
+import { useCart } from '../../context/index'
+import { CartProductCard } from './CartProductCard'
+import { Link } from 'react-router-dom'
 import cartStyle from './Cart.module.css'
+
 export function Cart() {
+  const { cartItems } = useCart()
+  const price = (total, curr) => curr.price * curr.quantity + total
+  const totalPrice = cartItems.products.reduce(price, 0)
+  const totalDiscount = Math.floor(totalPrice * 0.1)
   return (
     <div className="home__container">
       <Navbar />
 
       <div className={`main__container ${cartStyle['main__container']}`}>
-        <div
-          className={`card card__horizontal card__shadow ${cartStyle['card__horizontal']}`}>
-          <span className={`card__image ${cartStyle['card__image']}`}>
-            <img src={image} alt="card Image" />
-          </span>
-          <div className={`card__footer ${cartStyle['card__footer']}`}>
-            <span className="card__title">Super Mario</span>
-            <div className="card__details">
-              <span className="card__details__price__new">₹2999</span>
-              <span className="card__details__price__old">₹3999</span>
-              <span className="card__details__discount">25% off</span>
+        <div className={cartStyle['cart__summary']}>
+          {cartItems.products.length === 0 ? (
+            <div className={cartStyle['flex__column']}>
+              <div className="text__lg text__center">Your Cart is Empty</div>
+              <div className="text__lg text__center">
+                Add Products to Your Cart
+              </div>
+              <Link to="/products" className="text__center">
+                <button className="btn btn__primary text__lg">Shop Now</button>
+              </Link>
             </div>
-            <div className={`${cartStyle['card__quantity']} text__md`}>
-              <label for="quantity">Quantity:</label>
-              <select id="cars" name="cars">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
-            </div>
-            <hr />
-            <div className={`card__buttons ${cartStyle['card__buttons']}`}>
+          ) : (
+            <div className={cartStyle['cart']}>
+              <h5>Price Details</h5>
+              <hr />
+              <div className={`${cartStyle['flex__column']} text__md`}>
+                <div className={cartStyle['flex__row']}>
+                  <span> Name</span>
+                  <span> Quantity</span>
+                </div>
+                {cartItems.products.map(product => {
+                  return (
+                    <div className={cartStyle['flex__row']}>
+                      <span>{product.title}</span>
+                      <span className="text__right"> {product.quantity}</span>
+                    </div>
+                  )
+                })}
+              </div>
+              <div className={`${cartStyle['cart__details']} text__md`}>
+                Total Price
+                <span className="text__right">₹{totalPrice}</span>
+              </div>
+              <div className={`${cartStyle['cart__details']} text__md`}>
+                Discount
+                <span>-₹{totalDiscount}</span>
+              </div>
+              <div className={`${cartStyle['cart__details']} text__md`}>
+                Delivery Charges
+                <span>₹499</span>
+              </div>
+              <hr />
+              <h5 className={cartStyle['cart__details']}>
+                Total Amount
+                <span className="text__lg">
+                  ₹{totalPrice - totalDiscount - 499}
+                </span>
+              </h5>
+              <hr />
+              <div className="text__md">
+                You will save ₹{totalDiscount} on this order
+              </div>
               <button
-                className={`btn btn__error__outlined ${cartStyle['btn']}`}>
-                Remove from Cart
-              </button>
-              <button className={`btn btn__primary ${cartStyle['btn']}`}>
-                Move to wish list
+                className={`btn btn__primary font__bold ${cartStyle['btn']}`}>
+                Check out
               </button>
             </div>
-          </div>
+          )}
         </div>
-        <div className={cartStyle['cart']}>
-          <h5>Price Details</h5>
-          <hr />
-          <div className={`${cartStyle['cart__details']} text__md`}>
-            Price(2 items)
-            <span className="text__r">₹5999</span>
-          </div>
-          <div className={`${cartStyle['cart__details']} text__md`}>
-            Discount
-            <span>-₹1999</span>
-          </div>
-          <div className={`${cartStyle['cart__details']} text__md`}>
-            Delivery Charges
-            <span>₹499</span>
-          </div>
-          <hr />
-          <h5 className={cartStyle['cart__details']}>
-            Total Amount
-            <span className="text__lg">₹4499</span>
-          </h5>
-          <hr />
-          <div className="text__md">You will save ₹1999 on this order</div>
-          <button className={`btn btn__primary font__bold ${cartStyle['btn']}`}>
-            Check out
-          </button>
+        <div className={cartStyle['cart__container']}>
+          {cartItems.products.map(product => (
+            <CartProductCard key={product._id} cartProduct={product} />
+          ))}
         </div>
       </div>
     </div>
