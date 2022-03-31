@@ -1,44 +1,30 @@
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 import '../../styles/index.css'
 import { image, center as heroImage } from '../../assets/images/index'
 import { Navbar } from '../../components/navbar/Navbar.jsx'
-import { Link } from 'react-router-dom'
-
+import { HomeProductCard } from './HomeProductCard'
 export function Homepage() {
+  const [categories, setCategories] = useState([])
+  useEffect(() => {
+    try {
+      ;(async () => {
+        const { data } = await axios.get('/api/categories')
+        setCategories(data.categories)
+      })()
+    } catch (e) {
+      console.log(e)
+    }
+  }, [])
+
   return (
     <div className="home__container">
       <Navbar />
       <div className="main__container">
         <div className="categories">
-          <div className="card card__shadow">
-            <Link to="/products">
-              <span className="card__text__overlay"> Action </span>
-              <img src={image} alt="Action" className="responsive__img" />
-            </Link>
-          </div>
-          <div className="card card__shadow">
-            <Link to="/products">
-              <span className="card__text__overlay"> Arcade </span>
-              <img src={image} alt="Arcade" className="responsive__img" />
-            </Link>
-          </div>
-          <div className="card card__shadow">
-            <Link to="/products">
-              <span className="card__text__overlay"> Strategy </span>
-              <img src={image} alt="Strategy" className="responsive__img" />
-            </Link>
-          </div>
-          <div className="card card__shadow">
-            <Link to="/products">
-              <span className="card__text__overlay"> Casual </span>
-              <img src={image} alt="Casual" className="responsive__img" />
-            </Link>
-          </div>
-          <div className="card card__shadow">
-            <Link to="/products">
-              <span className="card__text__overlay"> Sports </span>
-              <img src={image} alt="Sports" className="responsive__img" />
-            </Link>
-          </div>
+          {categories.map(category => (
+            <HomeProductCard key={category.id} category={category} />
+          ))}
         </div>
         <div className="center__image">
           <img src={heroImage} alt="He" className="responsive__img" />
