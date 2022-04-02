@@ -10,7 +10,7 @@ export function Homepage() {
   useEffect(() => {
     ;(async () => {
       try {
-        const { data } = await axios.get('/api/categoies')
+        const { data } = await axios.get('/api/categories')
         setCategories(data.categories)
       } catch (err) {
         setError(true)
@@ -21,18 +21,16 @@ export function Homepage() {
   return (
     <div className="home__container">
       <Navbar />
-      {
+      {error ? (
+        <div className="main__container text__lg text__center">
+          Something is Wrong from your Side 😔
+        </div>
+      ) : (
         <div className="main__container">
           <div className="categories">
-            {error ? (
-              <div className="text__lg">
-                Something is Wrong from your Side 😔
-              </div>
-            ) : (
-              categories.map(category => (
-                <HomeProductCard key={category.id} category={category} />
-              ))
-            )}
+            {categories.map(category => (
+              <HomeProductCard key={category.id} category={category} />
+            ))}
           </div>
           <div className="center__image">
             <img
@@ -76,7 +74,7 @@ export function Homepage() {
             </div>
           </div>
         </div>
-      }
+      )}
     </div>
   )
 }
