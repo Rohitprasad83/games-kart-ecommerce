@@ -12,13 +12,13 @@ function Filters() {
         <span className="font__bold">Filters</span>
         <button
           className={productStyle['filter__clear']}
-          onClick={() => productDispatch({ type: 'ClearAllFilters' })}>
+          onChange={() => productDispatch({ type: 'ClearAllFilters' })}>
           Clear
         </button>
       </div>
       <div
         className={`filter__slider ${productStyle['flex__column']} text__md`}>
-        <label for="slider">Select your Price</label>
+        <label htmlFor="slider">Select your Price</label>
         <div
           className={`${productStyle['slider__price']} text__md font__light`}>
           <span>1000</span>
@@ -96,7 +96,7 @@ function Filters() {
             type="radio"
             name="rating"
             checked={rating === '4_STARS_ABOVE'}
-            onClick={() => productDispatch({ type: '4_STARS_ABOVE' })}
+            onChange={() => productDispatch({ type: '4_STARS_ABOVE' })}
           />
           4 Stars and above
         </label>
@@ -105,7 +105,7 @@ function Filters() {
             type="radio"
             name="rating"
             checked={rating === '3_STARS_ABOVE'}
-            onClick={() => productDispatch({ type: '3_STARS_ABOVE' })}
+            onChange={() => productDispatch({ type: '3_STARS_ABOVE' })}
           />
           3 Stars and above
         </label>
@@ -114,7 +114,7 @@ function Filters() {
             type="radio"
             name="rating"
             checked={rating === '2_STARS_ABOVE'}
-            onClick={() => productDispatch({ type: '2_STARS_ABOVE' })}
+            onChange={() => productDispatch({ type: '2_STARS_ABOVE' })}
           />
           2 Stars and above
         </label>
@@ -123,7 +123,7 @@ function Filters() {
             type="radio"
             name="rating"
             checked={rating === '1_STARS_ABOVE'}
-            onClick={() => productDispatch({ type: '1_STARS_ABOVE' })}
+            onChange={() => productDispatch({ type: '1_STARS_ABOVE' })}
           />
           1 Stars and above
         </label>
@@ -144,7 +144,7 @@ function Filters() {
             type="radio"
             name="sorting"
             checked={sortBy === 'HIGH_TO_LOW'}
-            onClick={() => productDispatch({ type: 'HIGH_TO_LOW' })}
+            onChange={() => productDispatch({ type: 'HIGH_TO_LOW' })}
           />
           Price: High to Low
         </label>

@@ -5,17 +5,33 @@ import { useWishlistContext } from '../../context/index.jsx'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../../context/index.jsx'
 import wishlist from './Wishlist.module.css'
+import axios from 'axios'
 
 export function Wishlist() {
   const { wishlistItems } = useWishlistContext()
   const { users } = useAuth()
   const navigation = useNavigate()
 
-  const token = localStorage.getItem('token')
+  const encodedToken = localStorage.getItem('token')
   useEffect(() => {
-    !token && navigation('/login')
+    // !token && navigation('/login')
+    if (encodedToken) {
+      ;(async () => {
+        try {
+          const response = await axios.get('/api/user/wishlist', {
+            headers: {
+              authorization: encodedToken, // passing token as an authorization header
+            },
+          })
+          console.log(response)
+        } catch (err) {
+          console.log(err)
+        }
+      })()
+    } else {
+      navigation('/login')
+    }
   }, [])
-
   return (
     <div className="home__container">
       <Navbar />

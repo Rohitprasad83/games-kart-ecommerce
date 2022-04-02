@@ -5,18 +5,46 @@ import {
   addWishlistItem,
   containsInWishlist,
 } from '../../utils/wishlistUtils/index.jsx'
+import axios from 'axios'
 export function ProductCard({ product }) {
   const { wishlistItems, setWishlistItems } = useWishlistContext()
   const { cartItems, cartDispatch } = useCart()
   const { _id, title, img, price, oldPrice, discount, categoryName, rating } =
     product
+  const encodedToken = localStorage.getItem('token')
+
+  const addToWishlist = async (product, wishlistItems, setWishlistItems) => {
+    if (encodedToken) {
+      try {
+        const response = containsInWishlist(_id, wishlistItems)
+          ? await axios.post(
+              `/api/user/wishlist`,
+              { product },
+              {
+                headers: {
+                  authorization: encodedToken,
+                },
+              }
+            )
+          : await axios.delete(`/api/user/wishlist/${_id}`, {
+              headers: {
+                authorization: encodedToken,
+              },
+            })
+        addWishlistItem(product, wishlistItems, setWishlistItems)
+      } catch (error) {
+        console.log(error)
+      }
+    } else {
+      console.log('Please Login First')
+    }
+  }
+
   return (
     <div className={`${productStyle['card']} card__shadow`}>
       <span
         className="card__icon right"
-        onClick={() =>
-          addWishlistItem(product, wishlistItems, setWishlistItems)
-        }>
+        onClick={() => addToWishlist(product, wishlistItems, setWishlistItems)}>
         {
           <i
             className={
