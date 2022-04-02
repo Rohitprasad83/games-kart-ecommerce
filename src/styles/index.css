@@ -26,8 +26,13 @@
     cursor: pointer;
 }
 
-.categories>.card {
+.categories .card {
     width: 20rem;
+    height: 25rem;
+}
+
+.categories .card .responsive__img {
+    height: 25rem;
 }
 
 .center__image {
