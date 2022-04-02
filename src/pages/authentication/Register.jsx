@@ -70,6 +70,7 @@ export function Register() {
                 type="text"
                 id="first__name"
                 name="first__name"
+                value={firstName}
                 className={`form__group__input ${auth['input']}`}
                 onChange={e =>
                   userDispatch({ type: 'FIRST_NAME', payload: e.target.value })
@@ -83,10 +84,12 @@ export function Register() {
                 type="text"
                 id="last__name"
                 name="last__name"
+                value={lastName}
                 className={`form__group__input ${auth['input']}`}
                 onChange={e =>
                   userDispatch({ type: 'LAST_NAME', payload: e.target.value })
                 }
+                required
               />
             </label>
           </div>
@@ -101,6 +104,7 @@ export function Register() {
               onChange={e =>
                 userDispatch({ type: 'EMAIL', payload: e.target.value })
               }
+              required
             />
           </label>
           {email === '' ? (
@@ -119,10 +123,12 @@ export function Register() {
               type={showPassword}
               id="pass"
               name="pass"
+              value={password}
               className={`form__group__input ${auth['input']}`}
               onChange={e =>
                 userDispatch({ type: 'PASSWORD', payload: e.target.value })
               }
+              required
             />
           </label>
           {password === '' ? (
@@ -141,6 +147,7 @@ export function Register() {
               type={showPassword}
               id="confirm__password"
               name="confirm__password"
+              value={confirmPassword}
               className={`form__group__input ${auth['input']}`}
               onChange={e =>
                 userDispatch({
@@ -148,6 +155,7 @@ export function Register() {
                   payload: e.target.value,
                 })
               }
+              required
             />
           </label>
           {password === confirmPassword ? (
@@ -176,6 +184,12 @@ export function Register() {
             disabled={!allFieldsAreFilled}
             className={`btn btn__primary login ${auth['btn']}`}>
             Create a new Account
+          </button>
+          <button
+            type="submit"
+            onClick={() => userDispatch({ type: 'FILL_DUMMY_DETAILS' })}
+            className={`btn btn__warning login ${auth['btn']}`}>
+            SignUp with Dummy Details
           </button>
           <div className={`${auth['register']} text__center`}>
             <Link to="/login">Already have an account {'>'}</Link>
