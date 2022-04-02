@@ -26,7 +26,6 @@ export function Register() {
         lastName,
         password,
       })
-      console.log(response.data)
       localStorage.setItem('token', response.data.encodedToken)
       navigation('/')
     } catch (err) {
