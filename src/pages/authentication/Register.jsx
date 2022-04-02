@@ -1,10 +1,14 @@
-import { useState, useEffect, useReducer } from 'react'
+import { useState, useReducer } from 'react'
 import { Navbar } from '../../components/navbar/Navbar.jsx'
 import { useNavigate, Link } from 'react-router-dom'
 import axios from 'axios'
 import auth from './Authentication.module.css'
 import { authReducer } from '../../reducer/authReducer.jsx'
 import { useAuth } from '../../context'
+import {
+  validateEmail,
+  validatePass,
+} from '../../utils/authenticationUtils/index.js'
 export function Register() {
   const [userState, userDispatch] = useReducer(authReducer, {
     firstName: '',
@@ -34,18 +38,6 @@ export function Register() {
       setError("Could'nt Sign Up, Please try Again!")
       console.log(err)
     }
-  }
-
-  const validateEmail = email => {
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      )
-  }
-
-  const validatePass = pass => {
-    return pass.length >= 8
   }
 
   const showPasswordHandler = () => {
