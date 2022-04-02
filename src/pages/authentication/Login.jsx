@@ -3,12 +3,14 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
 import auth from './Authentication.module.css'
+import { useAuth } from '../../context'
 
 export function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const navigation = useNavigate()
   const [error, setError] = useState(null)
+  const { users, setUsers } = useAuth()
 
   const loginHandler = async e => {
     e.preventDefault()
@@ -18,13 +20,13 @@ export function Login() {
         password,
       })
       localStorage.setItem('token', response.data.encodedToken)
+      setUsers(response.data.foundUser)
       response.status === 200 && navigation('/')
     } catch (err) {
       setError("Could'nt Login Up, Please try Again!")
       console.log(err)
     }
   }
-
   const fillDummyDetails = () => {
     setEmail('adarshbalika@gmail.com')
     setPassword('adarshbalika')

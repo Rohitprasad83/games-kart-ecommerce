@@ -4,6 +4,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import axios from 'axios'
 import auth from './Authentication.module.css'
 import { authReducer } from '../../reducer/authReducer.jsx'
+import { useAuth } from '../../context'
 export function Register() {
   const [userState, userDispatch] = useReducer(authReducer, {
     firstName: '',
@@ -16,7 +17,7 @@ export function Register() {
   const [showPassword, setShowPassword] = useState('password')
   const navigation = useNavigate()
   const { email, firstName, lastName, password, confirmPassword } = userState
-
+  const { setUsers } = useAuth()
   const SignUpHandler = async e => {
     e.preventDefault()
     try {
@@ -27,7 +28,8 @@ export function Register() {
         password,
       })
       localStorage.setItem('token', response.data.encodedToken)
-      navigation('/')
+      setUsers(response.data.createdUser)
+      response.status === '200' && navigation('/')
     } catch (err) {
       setError("Could'nt Sign Up, Please try Again!")
       console.log(err)
