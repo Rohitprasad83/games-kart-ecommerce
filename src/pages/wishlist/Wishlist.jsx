@@ -1,11 +1,21 @@
+import { useEffect } from 'react'
 import { Navbar } from '../../components/navbar/Navbar.jsx'
-import wishlist from './Wishlist.module.css'
 import { WishlistCard } from './WishlistCard'
 import { useWishlistContext } from '../../context/index.jsx'
-import { Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
+import { useAuth } from '../../context/index.jsx'
+import wishlist from './Wishlist.module.css'
 
 export function Wishlist() {
   const { wishlistItems } = useWishlistContext()
+  const { users } = useAuth()
+  const navigation = useNavigate()
+
+  const token = localStorage.getItem('token')
+  useEffect(() => {
+    !token && navigation('/login')
+  }, [])
+
   return (
     <div className="home__container">
       <Navbar />

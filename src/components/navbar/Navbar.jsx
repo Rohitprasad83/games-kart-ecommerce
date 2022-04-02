@@ -4,6 +4,8 @@ import { useWishlistContext, useCart } from '../../context/index.jsx'
 export function Navbar() {
   const { cartItems } = useCart()
   const { wishlistItems } = useWishlistContext()
+  const token = localStorage.getItem('token')
+
   return (
     <nav className="navbar simple">
       <Link to="/">
@@ -14,9 +16,15 @@ export function Navbar() {
           <input type="text" className="search" placeholder="  🔍Search" />
         </li>
         <li className="navbar__list__items">
-          <Link to="/login">
-            <button className="btn btn__primary"> Login </button>
-          </Link>
+          {token ? (
+            <Link to="/profile">
+              <button className="btn btn__primary"> Profile </button>
+            </Link>
+          ) : (
+            <Link to="/login">
+              <button className="btn btn__primary"> Login </button>
+            </Link>
+          )}
         </li>
         <li className="navbar__list__items">
           <span className="badge__icons">
