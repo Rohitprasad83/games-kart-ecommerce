@@ -33,7 +33,7 @@ export function Register() {
       })
       localStorage.setItem('token', response.data.encodedToken)
       setUsers(response.data.createdUser)
-      response.status === '200' && navigation('/')
+      response.status === 201 && navigation('/')
     } catch (err) {
       setError("Could'nt Sign Up, Please try Again!")
       console.log(err)
