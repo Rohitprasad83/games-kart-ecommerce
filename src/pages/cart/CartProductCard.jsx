@@ -12,10 +12,8 @@ function CartProductCard({ cartProduct: product }) {
 
   const { _id, title, img, price, oldPrice, discount, quantity } = product
   const encodedToken = localStorage.getItem('token')
-  console.log(_id)
 
   const removeFromCart = async product => {
-    console.log(product)
     try {
       const id = _id
       const response = await axios.delete(`/api/user/cart/${product._id}`, {

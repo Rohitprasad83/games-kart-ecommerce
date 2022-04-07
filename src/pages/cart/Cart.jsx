@@ -7,22 +7,20 @@ import cartStyle from './Cart.module.css'
 import axios from 'axios'
 
 export function Cart() {
-  const { cartItems, set } = useCart()
+  const { cartItems } = useCart()
   const navigation = useNavigate()
   const token = localStorage.getItem('token')
   useEffect(() => {
     !token && navigation('/login')
   }, [])
-  console.log(cartItems)
   const encodedToken = localStorage.getItem('token')
   const getCartItems = async () => {
     try {
-      const response = await axios.get(`/api/user/cart`, {
+      await axios.get(`/api/user/cart`, {
         headers: {
           authorization: encodedToken,
         },
       })
-      // response.data === 200 && setCartItems(cartItems)
     } catch (err) {
       console.log('could not fetch cart')
     }

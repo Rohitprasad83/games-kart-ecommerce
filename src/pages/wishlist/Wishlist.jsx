@@ -11,13 +11,12 @@ export function Wishlist() {
 
   const encodedToken = localStorage.getItem('token')
   useEffect(() => {
-    // !token && navigation('/login')
     if (encodedToken) {
       ;(async () => {
         try {
           const response = await axios.get('/api/user/wishlist', {
             headers: {
-              authorization: encodedToken, // passing token as an authorization header
+              authorization: encodedToken,
             },
           })
           response.status === 200 && setWishlistItems(wishlistItems)
