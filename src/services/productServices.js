@@ -6,7 +6,6 @@ import {
 } from '../utils/wishlistUtils/index.jsx'
 
 const encodedToken = localStorage.getItem('token')
-
 const wishlistHandler = async(product, wishlistItems, setWishlistItems) => {
     if (encodedToken) {
         try {

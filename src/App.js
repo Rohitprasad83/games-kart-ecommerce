@@ -11,8 +11,7 @@ import {
   Logout,
   Profile,
 } from './pages/index'
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainerCustom } from './components/toast/ToastContainer'
 
 function App() {
   return (
@@ -29,7 +28,7 @@ function App() {
         <Route path="/mock" element={<Mockman />} />
       </Routes>
 
-      <ToastContainer />
+      <ToastContainerCustom />
     </div>
   )
 }
