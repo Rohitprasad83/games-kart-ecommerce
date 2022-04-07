@@ -10,6 +10,7 @@ import {
   Login,
   Logout,
   Profile,
+  Error404,
 } from './pages/index'
 import { ToastContainerCustom } from './components/toast/ToastContainer'
 
@@ -26,6 +27,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/mock" element={<Mockman />} />
+        <Route path="*" element={<Error404 />} />
       </Routes>
 
       <ToastContainerCustom />

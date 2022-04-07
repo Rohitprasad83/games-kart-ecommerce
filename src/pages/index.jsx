@@ -6,4 +6,15 @@ import { Register } from './authentication/Register.jsx'
 import { Login } from './authentication/Login.jsx'
 import { Logout } from './authentication/Logout.jsx'
 import { Profile } from './profile/Profile.jsx'
-export { Homepage, Products, Wishlist, Cart, Register, Login, Logout, Profile }
+import { Error404 } from './notFound.jsx'
+export {
+  Homepage,
+  Products,
+  Wishlist,
+  Cart,
+  Register,
+  Login,
+  Logout,
+  Profile,
+  Error404,
+}
