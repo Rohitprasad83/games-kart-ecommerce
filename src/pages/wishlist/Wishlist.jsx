@@ -1,11 +1,33 @@
+import { useEffect } from 'react'
 import { Navbar } from '../../components/navbar/Navbar.jsx'
-import wishlist from './Wishlist.module.css'
 import { WishlistCard } from './WishlistCard'
 import { useWishlistContext } from '../../context/index.jsx'
-import { Link } from 'react-router-dom'
-
+import { useNavigate, Link } from 'react-router-dom'
+import wishlist from './Wishlist.module.css'
+import axios from 'axios'
 export function Wishlist() {
-  const { wishlistItems } = useWishlistContext()
+  const { wishlistItems, setWishlistItems } = useWishlistContext()
+  const navigation = useNavigate()
+
+  const encodedToken = localStorage.getItem('token')
+  useEffect(() => {
+    if (encodedToken) {
+      ;(async () => {
+        try {
+          const response = await axios.get('/api/user/wishlist', {
+            headers: {
+              authorization: encodedToken,
+            },
+          })
+          response.status === 200 && setWishlistItems(wishlistItems)
+        } catch (err) {
+          console.log(err)
+        }
+      })()
+    } else {
+      navigation('/login')
+    }
+  }, [wishlistItems])
   return (
     <div className="home__container">
       <Navbar />

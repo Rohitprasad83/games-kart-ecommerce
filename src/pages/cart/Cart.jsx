@@ -1,11 +1,31 @@
+import { useEffect } from 'react'
 import { Navbar } from '../../components/navbar/Navbar.jsx'
 import { useCart } from '../../context/index'
 import { CartProductCard } from './CartProductCard'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import cartStyle from './Cart.module.css'
+import axios from 'axios'
 
 export function Cart() {
   const { cartItems } = useCart()
+  const navigation = useNavigate()
+  const token = localStorage.getItem('token')
+  useEffect(() => {
+    !token && navigation('/login')
+  }, [])
+  const encodedToken = localStorage.getItem('token')
+  const getCartItems = async () => {
+    try {
+      await axios.get(`/api/user/cart`, {
+        headers: {
+          authorization: encodedToken,
+        },
+      })
+    } catch (err) {
+      console.log('could not fetch cart')
+    }
+  }
+  useEffect(() => getCartItems, [cartItems])
   const price = (total, curr) => curr.price * curr.quantity + total
   const totalPrice = cartItems.products.reduce(price, 0)
   const totalDiscount = Math.floor(totalPrice * 0.1)

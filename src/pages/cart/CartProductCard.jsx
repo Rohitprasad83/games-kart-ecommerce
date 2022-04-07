@@ -4,11 +4,54 @@ import {
   addWishlistItem,
   containsInWishlist,
 } from '../../utils/wishlistUtils/index.jsx'
+import axios from 'axios'
+
 function CartProductCard({ cartProduct: product }) {
   const { cartDispatch } = useCart()
   const { wishlistItems, setWishlistItems } = useWishlistContext()
 
   const { _id, title, img, price, oldPrice, discount, quantity } = product
+  const encodedToken = localStorage.getItem('token')
+
+  const removeFromCart = async product => {
+    try {
+      const id = _id
+      const response = await axios.delete(`/api/user/cart/${product._id}`, {
+        headers: { authorization: encodedToken },
+      })
+
+      response.status === 200 &&
+        cartDispatch({ type: 'REMOVE_FROM_CART', payload: id })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const quantityHandler = async (_id, action) => {
+    try {
+      const response = await axios.post(
+        `/api/user/cart/${_id}`,
+        {
+          action: {
+            type: action,
+          },
+        },
+        {
+          headers: {
+            authorization: encodedToken,
+          },
+        }
+      )
+      response.status === 200 &&
+        action === 'increment' &&
+        cartDispatch({ type: 'INCREASE_QUANTITY', payload: _id })
+      response.status === 200 &&
+        action === 'decrement' &&
+        cartDispatch({ type: 'DECREASE_QUANTITY', payload: _id })
+    } catch (err) {
+      console.log(err)
+    }
+  }
   return (
     <div
       className={`card card__horizontal card__shadow ${cartStyle['card__horizontal']}`}>
@@ -23,20 +66,16 @@ function CartProductCard({ cartProduct: product }) {
           <span className="card__details__discount">{discount} off</span>
         </div>
         <div className={`${cartStyle['card__quantity']} text__md`}>
-          <label for="quantity">Quantity:</label>
+          <label htmlFor="quantity">Quantity:</label>
           <button
             className={cartStyle['quantity__btn']}
-            onClick={() =>
-              cartDispatch({ type: 'INCREASE_QUANTITY', payload: _id })
-            }>
+            onClick={() => quantityHandler(_id, 'increment')}>
             +
           </button>
           <div>{quantity}</div>
           <button
             className={cartStyle['quantity__btn']}
-            onClick={() =>
-              cartDispatch({ type: 'DECREASE_QUANTITY', payload: _id })
-            }>
+            onClick={() => quantityHandler(_id, 'decrement')}>
             -
           </button>
         </div>
@@ -44,9 +83,7 @@ function CartProductCard({ cartProduct: product }) {
         <div className={`card__buttons ${cartStyle['card__buttons']}`}>
           <button
             className={`btn btn__error__outlined ${cartStyle['btn']}`}
-            onClick={() =>
-              cartDispatch({ type: 'REMOVE_FROM_CART', payload: _id })
-            }>
+            onClick={() => removeFromCart(_id)}>
             Remove from Cart
           </button>
           {containsInWishlist(_id, wishlistItems) ? (

@@ -5,18 +5,65 @@ import {
   addWishlistItem,
   containsInWishlist,
 } from '../../utils/wishlistUtils/index.jsx'
+import axios from 'axios'
 export function ProductCard({ product }) {
   const { wishlistItems, setWishlistItems } = useWishlistContext()
   const { cartItems, cartDispatch } = useCart()
   const { _id, title, img, price, oldPrice, discount, categoryName, rating } =
     product
+  const encodedToken = localStorage.getItem('token')
+
+  const addToWishlist = async (product, wishlistItems, setWishlistItems) => {
+    if (encodedToken) {
+      try {
+        const response = containsInWishlist(_id, wishlistItems)
+          ? await axios.post(
+              `/api/user/wishlist`,
+              { product },
+              {
+                headers: {
+                  authorization: encodedToken,
+                },
+              }
+            )
+          : await axios.delete(`/api/user/wishlist/${_id}`, {
+              headers: {
+                authorization: encodedToken,
+              },
+            })
+        const reponseStatus = response.status === 200 || response.status === 201
+        reponseStatus &&
+          addWishlistItem(product, wishlistItems, setWishlistItems)
+      } catch (error) {
+        console.log(error)
+      }
+    } else {
+      console.log('Please Login First')
+    }
+  }
+
+  const addToCart = async () => {
+    try {
+      const response = await axios.post(
+        `/api/user/cart`,
+        { product },
+        {
+          headers: {
+            authorization: encodedToken,
+          },
+        }
+      )
+      response.status === 201 &&
+        cartDispatch({ type: 'ADD_TO_CART', payload: product })
+    } catch (err) {
+      console.log('could not add to the cart')
+    }
+  }
   return (
     <div className={`${productStyle['card']} card__shadow`}>
       <span
         className="card__icon right"
-        onClick={() =>
-          addWishlistItem(product, wishlistItems, setWishlistItems)
-        }>
+        onClick={() => addToWishlist(product, wishlistItems, setWishlistItems)}>
         {
           <i
             className={
@@ -56,9 +103,7 @@ export function ProductCard({ product }) {
           ) : (
             <button
               className={`btn btn__primary ${productStyle['btn']}`}
-              onClick={() =>
-                cartDispatch({ type: 'ADD_TO_CART', payload: product })
-              }>
+              onClick={() => addToCart(product)}>
               Add to Cart
             </button>
           )}
