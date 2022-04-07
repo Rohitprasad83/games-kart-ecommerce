@@ -6,6 +6,8 @@ import {
   containsInWishlist,
 } from '../../utils/wishlistUtils/index.jsx'
 import axios from 'axios'
+import { successToast, errorToast } from '../../components/toast/Toast'
+
 export function ProductCard({ product }) {
   const { wishlistItems, setWishlistItems } = useWishlistContext()
   const { cartItems, cartDispatch } = useCart()
@@ -31,18 +33,25 @@ export function ProductCard({ product }) {
                 authorization: encodedToken,
               },
             })
-        const reponseStatus = response.status === 200 || response.status === 201
-        reponseStatus &&
+        const responseStatus =
+          response.status === 200 || response.status === 201
+
+        responseStatus &&
           addWishlistItem(product, wishlistItems, setWishlistItems)
+
+        response.status === 200 &&
+          successToast(product.title + ' added to wishlist')
+        response.status === 201 &&
+          successToast(product.title + ' removed from wishlist')
       } catch (error) {
-        console.log(error)
+        errorToast('Could not add to wishlist, please Try again!')
       }
     } else {
-      console.log('Please Login First')
+      errorToast('Please Login First')
     }
   }
 
-  const addToCart = async () => {
+  const addToCart = async product => {
     try {
       const response = await axios.post(
         `/api/user/cart`,
@@ -55,8 +64,10 @@ export function ProductCard({ product }) {
       )
       response.status === 201 &&
         cartDispatch({ type: 'ADD_TO_CART', payload: product })
+
+      successToast(product.title + ' added to Cart')
     } catch (err) {
-      console.log('could not add to the cart')
+      errorToast('Could not add to the cart, Please try again!')
     }
   }
   return (

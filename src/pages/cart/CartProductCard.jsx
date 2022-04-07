@@ -5,6 +5,7 @@ import {
   containsInWishlist,
 } from '../../utils/wishlistUtils/index.jsx'
 import axios from 'axios'
+import { successToast, errorToast } from '../../components/toast/Toast'
 
 function CartProductCard({ cartProduct: product }) {
   const { cartDispatch } = useCart()
@@ -22,8 +23,9 @@ function CartProductCard({ cartProduct: product }) {
 
       response.status === 200 &&
         cartDispatch({ type: 'REMOVE_FROM_CART', payload: id })
+      successToast(title + ' removed from cart')
     } catch (err) {
-      console.log(err)
+      errorToast('Could not remove product from cart')
     }
   }
 
@@ -49,7 +51,7 @@ function CartProductCard({ cartProduct: product }) {
         action === 'decrement' &&
         cartDispatch({ type: 'DECREASE_QUANTITY', payload: _id })
     } catch (err) {
-      console.log(err)
+      errorToast('could not update quantity, please try again!')
     }
   }
   return (
