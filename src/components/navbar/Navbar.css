@@ -72,6 +72,10 @@
     }
 }
 
+.navbar__list__items:first-child {
+    margin: 0;
+}
+
 @media only screen and (min-width: 480px) and (max-width: 768px) {
     .navbar__list__items .btn {
         font-size: 1.2rem;
