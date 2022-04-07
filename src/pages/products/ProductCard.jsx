@@ -42,6 +42,23 @@ export function ProductCard({ product }) {
     }
   }
 
+  const addToCart = async () => {
+    try {
+      const response = await axios.post(
+        `/api/user/cart`,
+        { product },
+        {
+          headers: {
+            authorization: encodedToken,
+          },
+        }
+      )
+      response.status === 201 &&
+        cartDispatch({ type: 'ADD_TO_CART', payload: product })
+    } catch (err) {
+      console.log('could not add to the cart')
+    }
+  }
   return (
     <div className={`${productStyle['card']} card__shadow`}>
       <span
@@ -86,9 +103,7 @@ export function ProductCard({ product }) {
           ) : (
             <button
               className={`btn btn__primary ${productStyle['btn']}`}
-              onClick={() =>
-                cartDispatch({ type: 'ADD_TO_CART', payload: product })
-              }>
+              onClick={() => addToCart(product)}>
               Add to Cart
             </button>
           )}
