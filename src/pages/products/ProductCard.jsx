@@ -1,80 +1,22 @@
 import { Link } from 'react-router-dom'
 import productStyle from './Products.module.css'
 import { useWishlistContext, useCart } from '../../context/index'
-import {
-  addWishlistItem,
-  containsInWishlist,
-} from '../../utils/wishlistUtils/index.jsx'
-import axios from 'axios'
-import { successToast, errorToast } from '../../components/toast/Toast'
+import { containsInWishlist } from '../../utils/wishlistUtils/index.jsx'
+import { wishlistHandler, addToCart } from '../../services'
 
 export function ProductCard({ product }) {
   const { wishlistItems, setWishlistItems } = useWishlistContext()
   const { cartItems, cartDispatch } = useCart()
   const { _id, title, img, price, oldPrice, discount, categoryName, rating } =
     product
-  const encodedToken = localStorage.getItem('token')
 
-  const addToWishlist = async (product, wishlistItems, setWishlistItems) => {
-    if (encodedToken) {
-      try {
-        const response = containsInWishlist(_id, wishlistItems)
-          ? await axios.post(
-              `/api/user/wishlist`,
-              { product },
-              {
-                headers: {
-                  authorization: encodedToken,
-                },
-              }
-            )
-          : await axios.delete(`/api/user/wishlist/${_id}`, {
-              headers: {
-                authorization: encodedToken,
-              },
-            })
-        const responseStatus =
-          response.status === 200 || response.status === 201
-
-        responseStatus &&
-          addWishlistItem(product, wishlistItems, setWishlistItems)
-
-        response.status === 200 &&
-          successToast(product.title + ' added to wishlist')
-        response.status === 201 &&
-          successToast(product.title + ' removed from wishlist')
-      } catch (error) {
-        errorToast('Could not add to wishlist, please Try again!')
-      }
-    } else {
-      errorToast('Please Login First')
-    }
-  }
-
-  const addToCart = async product => {
-    try {
-      const response = await axios.post(
-        `/api/user/cart`,
-        { product },
-        {
-          headers: {
-            authorization: encodedToken,
-          },
-        }
-      )
-      response.status === 201 &&
-        cartDispatch({ type: 'ADD_TO_CART', payload: product })
-
-      successToast(product.title + ' added to Cart')
-    } catch (err) {
-      errorToast('Could not add to the cart, Please try again!')
-    }
-  }
   return (
     <div className={`${productStyle['card']} card__shadow`}>
       <span
         className="card__icon right"
-        onClick={() => addToWishlist(product, wishlistItems, setWishlistItems)}>
+        onClick={() =>
+          wishlistHandler(product, wishlistItems, setWishlistItems)
+        }>
         {
           <i
             className={
@@ -114,7 +56,7 @@ export function ProductCard({ product }) {
           ) : (
             <button
               className={`btn btn__primary ${productStyle['btn']}`}
-              onClick={() => addToCart(product)}>
+              onClick={() => addToCart(product, cartDispatch)}>
               Add to Cart
             </button>
           )}

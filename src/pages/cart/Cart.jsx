@@ -9,11 +9,12 @@ import axios from 'axios'
 export function Cart() {
   const { cartItems } = useCart()
   const navigation = useNavigate()
-  const token = localStorage.getItem('token')
-  useEffect(() => {
-    !token && navigation('/login')
-  }, [])
   const encodedToken = localStorage.getItem('token')
+
+  useEffect(() => {
+    !encodedToken && navigation('/login')
+  }, [])
+
   const getCartItems = async () => {
     try {
       await axios.get(`/api/user/cart`, {
