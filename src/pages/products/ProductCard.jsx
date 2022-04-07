@@ -31,7 +31,9 @@ export function ProductCard({ product }) {
                 authorization: encodedToken,
               },
             })
-        addWishlistItem(product, wishlistItems, setWishlistItems)
+        const reponseStatus = response.status === 200 || response.status === 201
+        reponseStatus &&
+          addWishlistItem(product, wishlistItems, setWishlistItems)
       } catch (error) {
         console.log(error)
       }
