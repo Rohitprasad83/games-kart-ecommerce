@@ -3,13 +3,11 @@ import { Navbar } from '../../components/navbar/Navbar.jsx'
 import { WishlistCard } from './WishlistCard'
 import { useWishlistContext } from '../../context/index.jsx'
 import { useNavigate, Link } from 'react-router-dom'
-import { useAuth } from '../../context/index.jsx'
 import wishlist from './Wishlist.module.css'
 import axios from 'axios'
 
 export function Wishlist() {
-  const { wishlistItems } = useWishlistContext()
-  const { users } = useAuth()
+  const { wishlistItems, setWishlistItems } = useWishlistContext()
   const navigation = useNavigate()
 
   const encodedToken = localStorage.getItem('token')
@@ -23,7 +21,8 @@ export function Wishlist() {
               authorization: encodedToken, // passing token as an authorization header
             },
           })
-          console.log(response)
+
+          response.status === 200 && setWishlistItems(wishlistItems)
         } catch (err) {
           console.log(err)
         }
@@ -31,7 +30,7 @@ export function Wishlist() {
     } else {
       navigation('/login')
     }
-  }, [])
+  }, [wishlistItems])
   return (
     <div className="home__container">
       <Navbar />
