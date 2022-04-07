@@ -9,6 +9,8 @@ import {
   validateEmail,
   validatePass,
 } from '../../utils/authenticationUtils/index.js'
+import { successToast, errorToast } from '../../components/toast/Toast'
+import { useChangeTitle } from '../../utils/changeDocumentTitle'
 export function Register() {
   const [userState, userDispatch] = useReducer(authReducer, {
     firstName: '',
@@ -22,6 +24,8 @@ export function Register() {
   const navigation = useNavigate()
   const { email, firstName, lastName, password, confirmPassword } = userState
   const { setUsers } = useAuth()
+
+  useChangeTitle('Register')
   const SignUpHandler = async e => {
     e.preventDefault()
     try {
@@ -34,9 +38,10 @@ export function Register() {
       localStorage.setItem('token', response.data.encodedToken)
       setUsers(response.data.createdUser)
       response.status === 201 && navigation('/')
+      successToast('Welcome to GamesKart')
     } catch (err) {
       setError("Could'nt Sign Up, Please try Again!")
-      console.log(err)
+      errorToast(error)
     }
   }
 

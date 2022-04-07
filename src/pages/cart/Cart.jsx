@@ -5,15 +5,19 @@ import { CartProductCard } from './CartProductCard'
 import { Link, useNavigate } from 'react-router-dom'
 import cartStyle from './Cart.module.css'
 import axios from 'axios'
+import { useChangeTitle } from '../../utils/changeDocumentTitle'
 
 export function Cart() {
   const { cartItems } = useCart()
   const navigation = useNavigate()
-  const token = localStorage.getItem('token')
-  useEffect(() => {
-    !token && navigation('/login')
-  }, [])
   const encodedToken = localStorage.getItem('token')
+
+  useEffect(() => {
+    !encodedToken && navigation('/login')
+  }, [])
+
+  useChangeTitle('Cart')
+
   const getCartItems = async () => {
     try {
       await axios.get(`/api/user/cart`, {

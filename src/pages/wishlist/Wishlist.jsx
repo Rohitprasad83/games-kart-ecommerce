@@ -5,11 +5,14 @@ import { useWishlistContext } from '../../context/index.jsx'
 import { useNavigate, Link } from 'react-router-dom'
 import wishlist from './Wishlist.module.css'
 import axios from 'axios'
+import { useChangeTitle } from '../../utils/changeDocumentTitle'
+
 export function Wishlist() {
   const { wishlistItems, setWishlistItems } = useWishlistContext()
   const navigation = useNavigate()
-
+  useChangeTitle('Wishlist')
   const encodedToken = localStorage.getItem('token')
+
   useEffect(() => {
     if (encodedToken) {
       ;(async () => {

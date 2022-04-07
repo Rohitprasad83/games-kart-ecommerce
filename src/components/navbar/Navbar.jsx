@@ -1,11 +1,19 @@
 import './Navbar.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useWishlistContext, useCart } from '../../context/index.jsx'
+import { successToast } from '../toast/Toast'
 export function Navbar() {
-  const { cartItems } = useCart()
-  const { wishlistItems } = useWishlistContext()
+  const { cartItems, cartDispatch } = useCart()
+  const { wishlistItems, setWishlistItems } = useWishlistContext()
   const token = localStorage.getItem('token')
-
+  const navigation = useNavigate()
+  const logoutHandler = () => {
+    localStorage.removeItem('token')
+    successToast('You have been successfully logged out')
+    navigation('/login')
+    cartDispatch({ type: 'RESET', payload: [] })
+    setWishlistItems([])
+  }
   return (
     <nav className="navbar simple">
       <Link to="/">
@@ -13,13 +21,10 @@ export function Navbar() {
       </Link>
       <ul className="navbar__list">
         <li className="navbar__list__items">
-          <input type="text" className="search" placeholder="  🔍Search" />
-        </li>
-        <li className="navbar__list__items">
           {token ? (
-            <Link to="/profile">
-              <button className="btn btn__primary"> Profile </button>
-            </Link>
+            <button className="btn btn__primary" onClick={logoutHandler}>
+              Logout
+            </button>
           ) : (
             <Link to="/login">
               <button className="btn btn__primary"> Login </button>
@@ -43,6 +48,14 @@ export function Navbar() {
               <span className="badge__number badge__primary">
                 {cartItems.products.length}
               </span>
+            </Link>
+          </span>
+        </li>
+
+        <li className="navbar__list__items">
+          <span className="badge__icons">
+            <Link to="/profile">
+              <i className="fa-solid fa-user icon"></i>
             </Link>
           </span>
         </li>

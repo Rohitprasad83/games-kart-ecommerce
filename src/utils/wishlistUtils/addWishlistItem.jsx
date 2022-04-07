@@ -5,6 +5,7 @@ function addWishlistItem(product, wishlistItems, setWishlistItems) {
         wishlistItems.filter(item => item._id !== product._id)
       )
   }
+
   setWishlistItems([...wishlistItems, product])
 }
 

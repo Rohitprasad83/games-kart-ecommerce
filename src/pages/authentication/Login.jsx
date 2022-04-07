@@ -4,6 +4,8 @@ import { useState } from 'react'
 import axios from 'axios'
 import auth from './Authentication.module.css'
 import { useAuth } from '../../context'
+import { successToast, errorToast } from '../../components/toast/Toast'
+import { useChangeTitle } from '../../utils/changeDocumentTitle'
 
 export function Login() {
   const [email, setEmail] = useState('')
@@ -11,7 +13,7 @@ export function Login() {
   const navigation = useNavigate()
   const [error, setError] = useState(null)
   const { users, setUsers } = useAuth()
-
+  useChangeTitle('Login')
   const loginHandler = async e => {
     e.preventDefault()
     try {
@@ -22,9 +24,10 @@ export function Login() {
       localStorage.setItem('token', response.data.encodedToken)
       setUsers(response.data.foundUser)
       response.status === 200 && navigation('/')
+      successToast('Welcome Back to GamesKart')
     } catch (err) {
       setError("Could'nt Login Up, Please try Again!")
-      console.log(err)
+      errorToast(err)
     }
   }
   const fillDummyDetails = () => {

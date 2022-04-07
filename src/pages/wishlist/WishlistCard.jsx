@@ -1,12 +1,8 @@
-import { useEffect } from 'react'
 import wishlist from './Wishlist.module.css'
 import { useWishlistContext, useCart } from '../../context/index'
 import { Link } from 'react-router-dom'
-import {
-  addWishlistItem,
-  containsInWishlist,
-} from '../../utils/wishlistUtils/index.jsx'
-import axios from 'axios'
+import { containsInWishlist } from '../../utils/wishlistUtils/index.jsx'
+import { wishlistHandler, addToCart } from '../../services'
 
 export function WishlistCard(product) {
   const { wishlistItems, setWishlistItems } = useWishlistContext()
@@ -14,39 +10,14 @@ export function WishlistCard(product) {
 
   const { _id, title, img, price, oldPrice, discount, categoryName, rating } =
     product
-  const encodedToken = localStorage.getItem('token')
 
-  const addToWishlist = async (product, wishlistItems, setWishlistItems) => {
-    if (encodedToken) {
-      try {
-        const response = containsInWishlist(_id, wishlistItems)
-          ? await axios.post(
-              `/api/user/wishlist`,
-              { product },
-              {
-                headers: {
-                  authorization: encodedToken,
-                },
-              }
-            )
-          : await axios.delete(`/api/user/wishlist/${_id}`, {
-              headers: {
-                authorization: encodedToken,
-              },
-            })
-        addWishlistItem(product, wishlistItems, setWishlistItems)
-      } catch (error) {
-        console.log(error)
-      }
-    } else {
-      console.log('Please Login First')
-    }
-  }
   return (
     <div className="card card__shadow">
       <span
         className="card__icon right"
-        onClick={() => addToWishlist(product, wishlistItems, setWishlistItems)}>
+        onClick={() =>
+          wishlistHandler(product, wishlistItems, setWishlistItems)
+        }>
         {
           <i
             className={
@@ -85,9 +56,7 @@ export function WishlistCard(product) {
           ) : (
             <button
               className={`btn btn__primary ${wishlist['btn']}`}
-              onClick={() =>
-                cartDispatch({ type: 'ADD_TO_CART', payload: product })
-              }>
+              onClick={() => addToCart(product, cartDispatch)}>
               Add to Cart
             </button>
           )}

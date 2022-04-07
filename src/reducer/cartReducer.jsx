@@ -44,6 +44,8 @@ function cartReducer(state, action) {
             : { ...product }
         ),
       }
+    case 'RESET':
+      return { ...state, products: [] }
     default:
       return { ...state }
   }
