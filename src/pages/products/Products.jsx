@@ -5,13 +5,14 @@ import { Filters } from './Filters'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useProductFilter } from '../../context/product-context'
-
+import { useChangeTitle } from '../../utils/changeDocumentTitle'
 import {
   sortByPrice,
   filterProductsByCategory,
   filterByRange,
   filterProductsByRating,
 } from '../../utils/productUtils/index'
+
 export function Products() {
   const [products, setProducts] = useState([])
   const { filters } = useProductFilter()
@@ -21,6 +22,8 @@ export function Products() {
   const filteredProducts = filterProductsByCategory(filteredRange, category)
   const filteredRating = filterProductsByRating(filteredProducts, rating)
   const sortedData = sortByPrice(filteredRating, sortBy)
+
+  useChangeTitle('Prdoucts')
 
   useEffect(() => {
     ;(async function getData() {

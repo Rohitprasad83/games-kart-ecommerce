@@ -5,6 +5,7 @@ import { CartProductCard } from './CartProductCard'
 import { Link, useNavigate } from 'react-router-dom'
 import cartStyle from './Cart.module.css'
 import axios from 'axios'
+import { useChangeTitle } from '../../utils/changeDocumentTitle'
 
 export function Cart() {
   const { cartItems } = useCart()
@@ -14,6 +15,8 @@ export function Cart() {
   useEffect(() => {
     !encodedToken && navigation('/login')
   }, [])
+
+  useChangeTitle('Cart')
 
   const getCartItems = async () => {
     try {

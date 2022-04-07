@@ -10,7 +10,7 @@ import {
   validatePass,
 } from '../../utils/authenticationUtils/index.js'
 import { successToast, errorToast } from '../../components/toast/Toast'
-
+import { useChangeTitle } from '../../utils/changeDocumentTitle'
 export function Register() {
   const [userState, userDispatch] = useReducer(authReducer, {
     firstName: '',
@@ -24,6 +24,8 @@ export function Register() {
   const navigation = useNavigate()
   const { email, firstName, lastName, password, confirmPassword } = userState
   const { setUsers } = useAuth()
+
+  useChangeTitle('Register')
   const SignUpHandler = async e => {
     e.preventDefault()
     try {
