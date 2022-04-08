@@ -42,7 +42,6 @@ export function Register() {
       successToast('Welcome to GamesKart')
     } catch (err) {
       setError("Could'nt Sign Up, Please try Again!")
-      console.log(err)
       errorToast(error)
     }
   }
