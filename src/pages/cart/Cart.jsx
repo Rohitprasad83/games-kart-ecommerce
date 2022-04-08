@@ -6,15 +6,17 @@ import { Link, useNavigate } from 'react-router-dom'
 import cartStyle from './Cart.module.css'
 import axios from 'axios'
 import { useChangeTitle } from '../../utils/changeDocumentTitle'
+import { useAuth } from '../../context'
 
 export function Cart() {
   const { cartItems } = useCart()
   const navigation = useNavigate()
-  const encodedToken = localStorage.getItem('token')
-
+  const { encodedToken } = useAuth()
   useEffect(() => {
     !encodedToken && navigation('/login')
-  }, [])
+  }, [encodedToken])
+
+  useEffect(() => getCartItems, [cartItems])
 
   useChangeTitle('Cart')
 
@@ -29,7 +31,6 @@ export function Cart() {
       console.log('could not fetch cart')
     }
   }
-  useEffect(() => getCartItems, [cartItems])
   const price = (total, curr) => curr.price * curr.quantity + total
   const totalPrice = cartItems.products.reduce(price, 0)
   const totalDiscount = Math.floor(totalPrice * 0.1)

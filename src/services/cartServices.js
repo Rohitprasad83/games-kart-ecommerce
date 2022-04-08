@@ -3,7 +3,7 @@ import { successToast, errorToast } from '../components/toast/Toast'
 
 const encodedToken = localStorage.getItem('token')
 
-const quantityHandler = async(_id, action, cartDispatch) => {
+const quantityHandler = async(_id, action, cartDispatch, encodedToken) => {
     try {
         const response = await axios.post(
             `/api/user/cart/${_id}`, {
@@ -27,7 +27,7 @@ const quantityHandler = async(_id, action, cartDispatch) => {
     }
 }
 
-const removeFromCart = async(product, cartDispatch) => {
+const removeFromCart = async(product, cartDispatch, encodedToken) => {
     try {
         const response = await axios.delete(`/api/user/cart/${product._id}`, {
             headers: { authorization: encodedToken },

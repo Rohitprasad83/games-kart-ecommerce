@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Navbar } from '../../components/navbar/Navbar.jsx'
 import { WishlistCard } from './WishlistCard'
-import { useWishlistContext } from '../../context/index.jsx'
+import { useWishlistContext, useAuth } from '../../context/index.jsx'
 import { useNavigate, Link } from 'react-router-dom'
 import wishlist from './Wishlist.module.css'
 import axios from 'axios'
@@ -11,7 +11,7 @@ export function Wishlist() {
   const { wishlistItems, setWishlistItems } = useWishlistContext()
   const navigation = useNavigate()
   useChangeTitle('Wishlist')
-  const encodedToken = localStorage.getItem('token')
+  const { encodedToken } = useAuth()
 
   useEffect(() => {
     if (encodedToken) {
@@ -30,7 +30,7 @@ export function Wishlist() {
     } else {
       navigation('/login')
     }
-  }, [wishlistItems])
+  }, [wishlistItems, encodedToken])
   return (
     <div className="home__container">
       <Navbar />

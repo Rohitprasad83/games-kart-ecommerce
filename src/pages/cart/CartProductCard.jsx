@@ -6,10 +6,12 @@ import {
   quantityHandler,
   wishlistHandler,
 } from '../../services'
+import { useAuth } from '../../context'
 
 function CartProductCard({ cartProduct: product }) {
   const { cartDispatch } = useCart()
   const { wishlistItems, setWishlistItems } = useWishlistContext()
+  const { encodedToken } = useAuth()
 
   const { _id, title, img, price, oldPrice, discount, quantity } = product
   return (
@@ -29,13 +31,17 @@ function CartProductCard({ cartProduct: product }) {
           <label htmlFor="quantity">Quantity:</label>
           <button
             className={cartStyle['quantity__btn']}
-            onClick={() => quantityHandler(_id, 'increment', cartDispatch)}>
+            onClick={() =>
+              quantityHandler(_id, 'increment', cartDispatch, encodedToken)
+            }>
             +
           </button>
           <div>{quantity}</div>
           <button
             className={cartStyle['quantity__btn']}
-            onClick={() => quantityHandler(_id, 'decrement', cartDispatch)}>
+            onClick={() =>
+              quantityHandler(_id, 'decrement', cartDispatch, encodedToken)
+            }>
             -
           </button>
         </div>
@@ -43,7 +49,7 @@ function CartProductCard({ cartProduct: product }) {
         <div className={`card__buttons ${cartStyle['card__buttons']}`}>
           <button
             className={`btn btn__error__outlined ${cartStyle['btn']}`}
-            onClick={() => removeFromCart(product, cartDispatch)}>
+            onClick={() => removeFromCart(product, cartDispatch, encodedToken)}>
             Remove from Cart
           </button>
           {containsInWishlist(_id, wishlistItems) ? (
@@ -54,7 +60,12 @@ function CartProductCard({ cartProduct: product }) {
             <button
               className={`btn btn__primary ${cartStyle['btn']}`}
               onClick={() =>
-                wishlistHandler(product, wishlistItems, setWishlistItems)
+                wishlistHandler(
+                  product,
+                  wishlistItems,
+                  setWishlistItems,
+                  encodedToken
+                )
               }>
               Move to WishList
             </button>
