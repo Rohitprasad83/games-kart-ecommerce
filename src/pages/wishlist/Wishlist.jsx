@@ -6,6 +6,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import wishlist from './Wishlist.module.css'
 import axios from 'axios'
 import { useChangeTitle } from '../../utils/changeDocumentTitle'
+import { errorToast } from '../../components/toast/Toast.jsx'
 
 export function Wishlist() {
   const { wishlistItems, setWishlistItems } = useWishlistContext()
@@ -24,10 +25,11 @@ export function Wishlist() {
           })
           response.status === 200 && setWishlistItems(wishlistItems)
         } catch (err) {
-          console.log(err)
+          errorToast('Could not fetch Wishlist, please try again!')
         }
       })()
     } else {
+      errorToast('Please Login First!')
       navigation('/login')
     }
   }, [wishlistItems, encodedToken])
