@@ -7,6 +7,7 @@ import cartStyle from './Cart.module.css'
 import axios from 'axios'
 import { useChangeTitle } from '../../utils/changeDocumentTitle'
 import { useAuth } from '../../context'
+import { errorToast } from '../../components/toast/Toast.jsx'
 
 export function Cart() {
   const { cartItems } = useCart()
@@ -21,14 +22,18 @@ export function Cart() {
   useChangeTitle('Cart')
 
   const getCartItems = async () => {
-    try {
-      await axios.get(`/api/user/cart`, {
-        headers: {
-          authorization: encodedToken,
-        },
-      })
-    } catch (err) {
-      console.log('could not fetch cart')
+    if (encodedToken) {
+      try {
+        await axios.get(`/api/user/cart`, {
+          headers: {
+            authorization: encodedToken,
+          },
+        })
+      } catch (err) {
+        errorToast('could not fetch cart')
+      }
+    } else {
+      errorToast('Please Login First!')
     }
   }
   const price = (total, curr) => curr.price * curr.quantity + total
