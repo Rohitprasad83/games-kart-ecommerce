@@ -12,7 +12,7 @@ export function Login() {
   const [password, setPassword] = useState('')
   const navigation = useNavigate()
   const [error, setError] = useState(null)
-  const { users, setUsers } = useAuth()
+  const { users, setUsers, setEncodedToken } = useAuth()
   useChangeTitle('Login')
   const loginHandler = async e => {
     e.preventDefault()
@@ -23,6 +23,7 @@ export function Login() {
       })
       localStorage.setItem('token', response.data.encodedToken)
       setUsers(response.data.foundUser)
+      setEncodedToken(localStorage.getItem('token'))
       response.status === 200 && navigation('/')
       successToast('Welcome Back to GamesKart')
     } catch (err) {
