@@ -1,14 +1,15 @@
 import './Navbar.css'
 import { Link, useNavigate } from 'react-router-dom'
-import { useWishlistContext, useCart } from '../../context/index.jsx'
+import { useWishlistContext, useCart, useAuth } from '../../context/index.jsx'
 import { successToast } from '../toast/Toast'
 export function Navbar() {
   const { cartItems, cartDispatch } = useCart()
   const { wishlistItems, setWishlistItems } = useWishlistContext()
-  const token = localStorage.getItem('token')
+  const { encodedToken, setEncodedToken } = useAuth('token')
   const navigation = useNavigate()
   const logoutHandler = () => {
     localStorage.removeItem('token')
+    setEncodedToken(null)
     successToast('You have been successfully logged out')
     navigation('/login')
     cartDispatch({ type: 'RESET', payload: [] })
@@ -21,7 +22,7 @@ export function Navbar() {
       </Link>
       <ul className="navbar__list">
         <li className="navbar__list__items">
-          {token ? (
+          {encodedToken ? (
             <button className="btn btn__primary" onClick={logoutHandler}>
               Logout
             </button>

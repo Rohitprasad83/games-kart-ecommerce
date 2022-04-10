@@ -5,8 +5,12 @@ import {
     containsInWishlist,
 } from '../utils/wishlistUtils/index.jsx'
 
-const encodedToken = localStorage.getItem('token')
-const wishlistHandler = async(product, wishlistItems, setWishlistItems) => {
+const wishlistHandler = async(
+    product,
+    wishlistItems,
+    setWishlistItems,
+    encodedToken
+) => {
     if (encodedToken) {
         try {
             const response = containsInWishlist(product._id, wishlistItems) ?
@@ -39,21 +43,25 @@ const wishlistHandler = async(product, wishlistItems, setWishlistItems) => {
     }
 }
 
-const addToCart = async(product, cartDispatch) => {
-    try {
-        const response = await axios.post(
-            `/api/user/cart`, { product }, {
-                headers: {
-                    authorization: encodedToken,
-                },
-            }
-        )
-        response.status === 201 &&
-            cartDispatch({ type: 'ADD_TO_CART', payload: product })
+const addToCart = async(product, cartDispatch, encodedToken) => {
+    if (encodedToken) {
+        try {
+            const response = await axios.post(
+                `/api/user/cart`, { product }, {
+                    headers: {
+                        authorization: encodedToken,
+                    },
+                }
+            )
+            response.status === 201 &&
+                cartDispatch({ type: 'ADD_TO_CART', payload: product })
 
-        successToast(product.title + ' added to Cart')
-    } catch (err) {
-        errorToast('Could not add to the cart, Please try again!')
+            successToast(product.title + ' added to Cart')
+        } catch (err) {
+            errorToast('Could not add to the cart, Please try again!')
+        }
+    } else {
+        errorToast('Please Login First')
     }
 }
 export { wishlistHandler, addToCart }

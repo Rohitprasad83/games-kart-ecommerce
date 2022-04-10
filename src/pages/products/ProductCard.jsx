@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import productStyle from './Products.module.css'
-import { useWishlistContext, useCart } from '../../context/index'
+import { useWishlistContext, useCart, useAuth } from '../../context/index'
 import { containsInWishlist } from '../../utils/wishlistUtils/index.jsx'
 import { wishlistHandler, addToCart } from '../../services'
 
@@ -9,13 +9,18 @@ export function ProductCard({ product }) {
   const { cartItems, cartDispatch } = useCart()
   const { _id, title, img, price, oldPrice, discount, categoryName, rating } =
     product
-
+  const { encodedToken } = useAuth()
   return (
     <div className={`${productStyle['card']} card__shadow`}>
       <span
         className="card__icon right"
         onClick={() =>
-          wishlistHandler(product, wishlistItems, setWishlistItems)
+          wishlistHandler(
+            product,
+            wishlistItems,
+            setWishlistItems,
+            encodedToken
+          )
         }>
         {
           <i
@@ -56,7 +61,7 @@ export function ProductCard({ product }) {
           ) : (
             <button
               className={`btn btn__primary ${productStyle['btn']}`}
-              onClick={() => addToCart(product, cartDispatch)}>
+              onClick={() => addToCart(product, cartDispatch, encodedToken)}>
               Add to Cart
             </button>
           )}
