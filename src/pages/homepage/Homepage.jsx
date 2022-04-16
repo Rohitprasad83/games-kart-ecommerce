@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import '../../styles/index.css'
 import { image, center as heroImage } from '../../assets/images/index'
 import { Navbar } from '../../components/navbar/Navbar.jsx'
 import { HomeProductCard } from './HomeProductCard'
 import { useChangeTitle } from '../../utils/changeDocumentTitle'
+import { Footer } from '../../components/footer/Footer'
+
 export function Homepage() {
   const [categories, setCategories] = useState([])
   const [error, setError] = useState(null)
+
   useChangeTitle('Home')
   useEffect(() => {
     ;(async () => {
@@ -52,9 +56,11 @@ export function Homepage() {
                   Check out the newest releses of this month
                 </span>
                 <div className="card__buttons">
-                  <button className="btn btn__secondary">
-                    <i className="fa-solid fa-angle-right"> </i>
-                  </button>
+                  <Link to="/products">
+                    <button className="btn btn__secondary">
+                      <i className="fa-solid fa-angle-right"> </i>
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -68,15 +74,18 @@ export function Homepage() {
                   Check out the newest releses of this month
                 </span>
                 <div className="card__buttons">
-                  <button className="btn btn__secondary">
-                    <i className="fa-solid fa-angle-right"> </i>
-                  </button>
+                  <Link to="/products">
+                    <button className="btn btn__secondary">
+                      <i className="fa-solid fa-angle-right"> </i>
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
         </div>
       )}
+      <Footer />
     </div>
   )
 }
