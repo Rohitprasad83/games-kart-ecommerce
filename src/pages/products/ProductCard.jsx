@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import productStyle from './Products.module.css'
 import { useWishlistContext, useCart, useAuth } from '../../context/index'
@@ -9,7 +10,10 @@ export function ProductCard({ product }) {
   const { cartItems, cartDispatch } = useCart()
   const { _id, title, img, price, oldPrice, discount, categoryName, rating } =
     product
-  const { encodedToken } = useAuth()
+  const { encodedToken, setEncodedToken } = useAuth()
+  useEffect(() => {
+    setEncodedToken(localStorage.getItem('token'))
+  }, [])
   return (
     <div className={`${productStyle['card']} card__shadow`}>
       <span

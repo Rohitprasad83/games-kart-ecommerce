@@ -1,8 +1,6 @@
 import axios from 'axios'
 import { successToast, errorToast } from '../components/toast/Toast'
 
-const encodedToken = localStorage.getItem('token')
-
 const quantityHandler = async(_id, action, cartDispatch, encodedToken) => {
     try {
         const response = await axios.post(
