@@ -52,8 +52,12 @@
 }
 
 .center__image {
-    max-width: 80rem;
-    margin: 3rem auto;
+    margin: 0 auto 5rem;
+    padding: 5rem;
+}
+
+.center__image>img {
+    border-radius: 2rem;
 }
 
 .bottom__categories {
@@ -61,4 +65,15 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin: 4rem auto 2rem auto;
+}
+
+@media (max-width: 768px) {
+    .center__image {
+        margin: 0 auto 5rem;
+        padding: 0rem;
+    }
+    .center__image>img {
+        border-radius: 0;
+    }
 }
