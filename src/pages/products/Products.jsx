@@ -1,18 +1,18 @@
-import { Navbar } from '../../components/navbar/Navbar.jsx'
-import { Footer } from '../../components/footer/Footer'
+import { Navbar } from 'components/navbar/Navbar.jsx'
+import { Footer } from 'components/footer/Footer'
 import product from './Products.module.css'
 import { ProductCard } from './ProductCard'
 import { Filters } from './Filters'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useProductFilter } from '../../context/product-context'
-import { useChangeTitle } from '../../utils/changeDocumentTitle'
+import { useProductFilter } from 'context/product-context'
+import { useChangeTitle } from 'utils/changeDocumentTitle'
 import {
   sortByPrice,
   filterProductsByCategory,
   filterByRange,
   filterProductsByRating,
-} from '../../utils/productUtils/index'
+} from 'utils/productUtils/index'
 
 export function Products() {
   const [products, setProducts] = useState([])

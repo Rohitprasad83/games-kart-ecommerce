@@ -1,17 +1,14 @@
 import { useState, useReducer } from 'react'
-import { Navbar } from '../../components/navbar/Navbar.jsx'
-import { Footer } from '../../components/footer/Footer'
+import { Navbar } from 'components/navbar/Navbar.jsx'
+import { Footer } from 'components/footer/Footer'
 import { useNavigate, Link } from 'react-router-dom'
 import axios from 'axios'
 import auth from './Authentication.module.css'
-import { authReducer } from '../../reducer/authReducer.jsx'
-import { useAuth } from '../../context'
-import {
-  validateEmail,
-  validatePass,
-} from '../../utils/authenticationUtils/index.js'
-import { successToast, errorToast } from '../../components/toast/Toast'
-import { useChangeTitle } from '../../utils/changeDocumentTitle'
+import { authReducer } from 'reducer/authReducer.jsx'
+import { useAuth } from 'context'
+import { validateEmail, validatePass } from 'utils/authenticationUtils/index.js'
+import { successToast, errorToast } from 'components/toast/Toast'
+import { useChangeTitle } from 'utils/changeDocumentTitle'
 export function Register() {
   const [userState, userDispatch] = useReducer(authReducer, {
     firstName: '',

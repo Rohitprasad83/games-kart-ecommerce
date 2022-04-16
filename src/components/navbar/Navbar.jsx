@@ -1,6 +1,6 @@
 import './Navbar.css'
 import { Link, useNavigate } from 'react-router-dom'
-import { useWishlistContext, useCart, useAuth } from '../../context/index.jsx'
+import { useWishlistContext, useCart, useAuth } from 'context/index.jsx'
 import { successToast } from '../toast/Toast'
 export function Navbar() {
   const { cartItems, cartDispatch } = useCart()

@@ -1,7 +1,7 @@
-import { Navbar } from '../components/navbar/Navbar.jsx'
-import { Footer } from '../components/footer/Footer'
-import { useChangeTitle } from '../utils/changeDocumentTitle'
-import error404 from '../assets/images/error404.png'
+import { Navbar } from 'components/navbar/Navbar.jsx'
+import { Footer } from 'components/footer/Footer'
+import { useChangeTitle } from 'utils/changeDocumentTitle'
+import error404 from 'assets/images/error404.png'
 export function Error404() {
   useChangeTitle('404')
   return (

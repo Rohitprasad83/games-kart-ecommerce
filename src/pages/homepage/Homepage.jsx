@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import '../../styles/index.css'
-import { image, center as heroImage } from '../../assets/images/index'
-import { Navbar } from '../../components/navbar/Navbar.jsx'
+import 'styles/index.css'
+import { image, center as heroImage } from 'assets/images/index'
+import { Navbar } from 'components/navbar/Navbar.jsx'
 import { HomeProductCard } from './HomeProductCard'
-import { useChangeTitle } from '../../utils/changeDocumentTitle'
-import { Footer } from '../../components/footer/Footer'
+import { useChangeTitle } from 'utils/changeDocumentTitle'
+import { Footer } from 'components/footer/Footer'
 
 export function Homepage() {
   const [categories, setCategories] = useState([])

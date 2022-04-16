@@ -1,12 +1,12 @@
-import { Navbar } from '../../components/navbar/Navbar.jsx'
-import { Footer } from '../../components/footer/Footer.jsx'
+import { Navbar } from 'components/navbar/Navbar.jsx'
+import { Footer } from 'components/footer/Footer.jsx'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
 import auth from './Authentication.module.css'
-import { useAuth } from '../../context'
-import { successToast, errorToast } from '../../components/toast/Toast'
-import { useChangeTitle } from '../../utils/changeDocumentTitle'
+import { useAuth } from 'context/index.jsx'
+import { successToast, errorToast } from 'components/toast/Toast'
+import { useChangeTitle } from 'utils/changeDocumentTitle'
 
 export function Login() {
   const [email, setEmail] = useState('')

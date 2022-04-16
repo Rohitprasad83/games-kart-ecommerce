@@ -1,6 +1,6 @@
-import { Navbar } from '../../components/navbar/Navbar.jsx'
-import { useChangeTitle } from '../../utils/changeDocumentTitle'
-import { Footer } from '../../components/footer/Footer'
+import { Navbar } from 'components/navbar/Navbar.jsx'
+import { useChangeTitle } from 'utils/changeDocumentTitle'
+import { Footer } from 'components/footer/Footer'
 
 function Profile() {
   useChangeTitle('Profile')

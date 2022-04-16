@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import productStyle from './Products.module.css'
-import { useWishlistContext, useCart, useAuth } from '../../context/index'
-import { containsInWishlist } from '../../utils/wishlistUtils/index.jsx'
-import { wishlistHandler, addToCart } from '../../services'
+import { useWishlistContext, useCart, useAuth } from 'context/index'
+import { containsInWishlist } from 'utils/wishlistUtils/index.jsx'
+import { wishlistHandler, addToCart } from 'services'
 
 export function ProductCard({ product }) {
   const { wishlistItems, setWishlistItems } = useWishlistContext()
