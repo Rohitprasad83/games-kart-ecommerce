@@ -1,4 +1,5 @@
 import { Navbar } from '../../components/navbar/Navbar.jsx'
+import { Footer } from '../../components/footer/Footer'
 import product from './Products.module.css'
 import { ProductCard } from './ProductCard'
 import { Filters } from './Filters'
@@ -45,6 +46,7 @@ export function Products() {
           ))}
         </main>
       </div>
+      <Footer />
     </div>
   )
 }

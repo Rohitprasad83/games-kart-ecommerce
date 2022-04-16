@@ -1,5 +1,6 @@
 import { useState, useReducer } from 'react'
 import { Navbar } from '../../components/navbar/Navbar.jsx'
+import { Footer } from '../../components/footer/Footer'
 import { useNavigate, Link } from 'react-router-dom'
 import axios from 'axios'
 import auth from './Authentication.module.css'
@@ -202,6 +203,7 @@ export function Register() {
           </div>
         </form>
       </div>
+      <Footer />
     </div>
   )
 }

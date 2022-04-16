@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Navbar } from '../../components/navbar/Navbar.jsx'
+import { Footer } from '../../components/footer/Footer'
 import { WishlistCard } from './WishlistCard'
 import { useWishlistContext, useAuth } from '../../context/index.jsx'
 import { useNavigate, Link } from 'react-router-dom'
@@ -69,6 +70,7 @@ export function Wishlist() {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

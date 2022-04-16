@@ -1,4 +1,5 @@
 import { Navbar } from '../components/navbar/Navbar.jsx'
+import { Footer } from '../components/footer/Footer'
 import { useChangeTitle } from '../utils/changeDocumentTitle'
 import error404 from '../assets/images/error404.png'
 export function Error404() {
@@ -17,6 +18,7 @@ export function Error404() {
           className="responsive__img error404"
         />
       </div>
+      <Footer />
     </div>
   )
 }

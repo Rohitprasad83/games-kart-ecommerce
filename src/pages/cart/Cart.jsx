@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Navbar } from '../../components/navbar/Navbar.jsx'
+import { Footer } from '../../components/footer/Footer'
 import { useCart } from '../../context/index'
 import { CartProductCard } from './CartProductCard'
 import { Link, useNavigate } from 'react-router-dom'
@@ -109,6 +110,7 @@ export function Cart() {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import { Navbar } from '../../components/navbar/Navbar.jsx'
+import { Footer } from '../../components/footer/Footer.jsx'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
@@ -93,6 +94,7 @@ export function Login() {
           </div>
         </form>
       </div>
+      <Footer />
     </div>
   )
 }
