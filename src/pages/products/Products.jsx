@@ -1,5 +1,4 @@
-import { Navbar } from 'components/navbar/Navbar.jsx'
-import { Footer } from 'components/footer/Footer'
+import { Navbar, Footer } from 'components/index'
 import product from './Products.module.css'
 import { ProductCard } from './ProductCard'
 import { Filters } from './Filters'
@@ -24,7 +23,7 @@ export function Products() {
   const filteredRating = filterProductsByRating(filteredProducts, rating)
   const sortedData = sortByPrice(filteredRating, sortBy)
 
-  useChangeTitle('Prdoucts')
+  useChangeTitle('Products')
 
   useEffect(() => {
     ;(async function getData() {
