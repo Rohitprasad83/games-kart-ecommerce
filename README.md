@@ -22,7 +22,7 @@ An Ecom site for buying premium games built using Mockbee api and Paricle UI.
 * [React Router Dom](https://v5.reactrouter.com/web/guides/quick-start)
 * [React Toastify](https://fkhadra.github.io/react-toastify/introduction)
 ## To Run Locally
-Clone the repository on your local machine with the command below in your terminal, and cd into the the-red-closet-ecom folder
+Clone the repository on your local machine with the command below in your terminal, and cd into the games-kart-ecommerce folder
 
 ### Clone the Repository
 ```
