@@ -10,11 +10,11 @@ function Filters() {
     <aside className={`${productStyle['filter']} text__md`}>
       <div className={productStyle['filter__header']}>
         <span className="font__bold">Filters</span>
-        <button
+        <p
           className={productStyle['filter__clear']}
-          onChange={() => productDispatch({ type: 'ClearAllFilters' })}>
-          Clear
-        </button>
+          onClick={() => productDispatch({ type: 'ClearAllFilters' })}>
+          Clear All
+        </p>
       </div>
       <div
         className={`filter__slider ${productStyle['flex__column']} text__md`}>
