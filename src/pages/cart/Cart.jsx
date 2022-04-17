@@ -1,13 +1,12 @@
 import { useEffect } from 'react'
-import { Navbar } from '../../components/navbar/Navbar.jsx'
-import { useCart } from '../../context/index'
-import { CartProductCard } from './CartProductCard'
 import { Link, useNavigate } from 'react-router-dom'
-import cartStyle from './Cart.module.css'
 import axios from 'axios'
-import { useChangeTitle } from '../../utils/changeDocumentTitle'
-import { useAuth } from '../../context'
-import { errorToast } from '../../components/toast/Toast.jsx'
+import { Navbar, Footer } from 'components/index'
+import { useCart, useAuth } from 'context/index'
+import { CartProductCard } from './CartProductCard'
+import { useChangeTitle } from 'utils/changeDocumentTitle'
+import { errorToast } from 'components/toast/Toast.jsx'
+import cartStyle from './Cart.module.css'
 
 export function Cart() {
   const { cartItems } = useCart()
@@ -109,6 +108,7 @@ export function Cart() {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

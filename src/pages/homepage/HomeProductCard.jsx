@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useProductFilter } from '../../context/index.jsx'
+import { useProductFilter } from 'context/index.jsx'
 const HomeProductCard = ({ category }) => {
   const { productDispatch } = useProductFilter()
   const { categoryName, img } = category

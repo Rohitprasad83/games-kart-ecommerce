@@ -1,8 +1,8 @@
 import wishlist from './Wishlist.module.css'
-import { useWishlistContext, useCart, useAuth } from '../../context/index'
+import { useWishlistContext, useCart, useAuth } from 'context/index'
 import { Link } from 'react-router-dom'
-import { containsInWishlist } from '../../utils/wishlistUtils/index.jsx'
-import { wishlistHandler, addToCart } from '../../services'
+import { containsInWishlist } from 'utils/wishlistUtils/index.jsx'
+import { wishlistHandler, addToCart } from 'services'
 
 export function WishlistCard(product) {
   const { wishlistItems, setWishlistItems } = useWishlistContext()

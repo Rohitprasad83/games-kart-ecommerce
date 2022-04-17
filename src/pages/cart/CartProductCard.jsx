@@ -1,12 +1,8 @@
-import { useWishlistContext, useCart } from '../../context/index'
+import { useWishlistContext, useCart } from 'context/index'
 import cartStyle from './Cart.module.css'
-import { containsInWishlist } from '../../utils/wishlistUtils/index.jsx'
-import {
-  removeFromCart,
-  quantityHandler,
-  wishlistHandler,
-} from '../../services'
-import { useAuth } from '../../context'
+import { containsInWishlist } from 'utils/wishlistUtils/index.jsx'
+import { removeFromCart, quantityHandler, wishlistHandler } from 'services'
+import { useAuth } from 'context'
 
 function CartProductCard({ cartProduct: product }) {
   const { cartDispatch } = useCart()
