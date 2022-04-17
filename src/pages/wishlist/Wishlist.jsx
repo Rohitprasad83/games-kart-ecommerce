@@ -1,12 +1,12 @@
 import { useEffect } from 'react'
-import { Navbar } from '../../components/navbar/Navbar.jsx'
-import { WishlistCard } from './WishlistCard'
-import { useWishlistContext, useAuth } from '../../context/index.jsx'
 import { useNavigate, Link } from 'react-router-dom'
-import wishlist from './Wishlist.module.css'
 import axios from 'axios'
-import { useChangeTitle } from '../../utils/changeDocumentTitle'
-import { errorToast } from '../../components/toast/Toast.jsx'
+import { Navbar, Footer } from 'components/index'
+import { WishlistCard } from './WishlistCard'
+import { useWishlistContext, useAuth } from 'context/index.jsx'
+import { useChangeTitle } from 'utils/changeDocumentTitle'
+import { errorToast } from 'components/toast/Toast.jsx'
+import wishlist from './Wishlist.module.css'
 
 export function Wishlist() {
   const { wishlistItems, setWishlistItems } = useWishlistContext()
@@ -69,6 +69,7 @@ export function Wishlist() {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

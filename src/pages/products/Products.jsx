@@ -1,17 +1,17 @@
-import { Navbar } from '../../components/navbar/Navbar.jsx'
+import { Navbar, Footer } from 'components/index'
 import product from './Products.module.css'
 import { ProductCard } from './ProductCard'
 import { Filters } from './Filters'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useProductFilter } from '../../context/product-context'
-import { useChangeTitle } from '../../utils/changeDocumentTitle'
+import { useProductFilter } from 'context/product-context'
+import { useChangeTitle } from 'utils/changeDocumentTitle'
 import {
   sortByPrice,
   filterProductsByCategory,
   filterByRange,
   filterProductsByRating,
-} from '../../utils/productUtils/index'
+} from 'utils/productUtils/index'
 
 export function Products() {
   const [products, setProducts] = useState([])
@@ -23,7 +23,7 @@ export function Products() {
   const filteredRating = filterProductsByRating(filteredProducts, rating)
   const sortedData = sortByPrice(filteredRating, sortBy)
 
-  useChangeTitle('Prdoucts')
+  useChangeTitle('Products')
 
   useEffect(() => {
     ;(async function getData() {
@@ -45,6 +45,7 @@ export function Products() {
           ))}
         </main>
       </div>
+      <Footer />
     </div>
   )
 }

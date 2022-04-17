@@ -1,6 +1,6 @@
 import './Navbar.css'
 import { Link, useNavigate } from 'react-router-dom'
-import { useWishlistContext, useCart, useAuth } from '../../context/index.jsx'
+import { useWishlistContext, useCart, useAuth } from 'context/index.jsx'
 import { successToast } from '../toast/Toast'
 export function Navbar() {
   const { cartItems, cartDispatch } = useCart()
@@ -18,7 +18,7 @@ export function Navbar() {
   return (
     <nav className="navbar simple">
       <Link to="/">
-        <h3 className="navbar__header"> Games-Cart </h3>
+        <h3 className="navbar__header"> Gamescart </h3>
       </Link>
       <ul className="navbar__list">
         <li className="navbar__list__items">

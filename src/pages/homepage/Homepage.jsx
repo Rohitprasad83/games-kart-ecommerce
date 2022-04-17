@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
-import '../../styles/index.css'
-import { image, center as heroImage } from '../../assets/images/index'
-import { Navbar } from '../../components/navbar/Navbar.jsx'
+import { testHero, bestseller, newest } from 'assets/images/index'
+import { Navbar, Footer } from 'components/index'
 import { HomeProductCard } from './HomeProductCard'
-import { useChangeTitle } from '../../utils/changeDocumentTitle'
+import { useChangeTitle } from 'utils/changeDocumentTitle'
+import 'styles/index.css'
+
 export function Homepage() {
   const [categories, setCategories] = useState([])
   const [error, setError] = useState(null)
+
   useChangeTitle('Home')
   useEffect(() => {
     ;(async () => {
@@ -29,38 +32,42 @@ export function Homepage() {
         </div>
       ) : (
         <div className="main__container">
+          <div className="center__image">
+            <img
+              src={testHero}
+              alt="Homepage Banner"
+              className="responsive__img"
+            />
+          </div>
+          <h4 className="text__center">Categories</h4>
           <div className="categories">
             {categories.map(category => (
               <HomeProductCard key={category.id} category={category} />
             ))}
           </div>
-          <div className="center__image">
-            <img
-              src={heroImage}
-              alt="Homepage Banner"
-              className="responsive__img"
-            />
-          </div>
+
           <div className="bottom__categories">
             <div className="card card__horizontal card__shadow">
               <span className="card__image">
-                <img src={image} alt="New Arrivals" />
+                <img src={bestseller} alt="Best Seller" />
               </span>
               <div className="card__footer">
-                <span className="card__title"> New Arrivals </span>
+                <span className="card__title"> Best Seller </span>
                 <span className="text__lg">
-                  Check out the newest releses of this month
+                  Check out the best Sellers of this month
                 </span>
                 <div className="card__buttons">
-                  <button className="btn btn__secondary">
-                    <i className="fa-solid fa-angle-right"> </i>
-                  </button>
+                  <Link to="/products">
+                    <button className="btn btn__primary">
+                      <i className="fa-solid fa-angle-right"> </i>
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
             <div className="card card__horizontal card__shadow">
               <span className="card__image">
-                <img src={image} alt="Monthly New Arrivals" />
+                <img src={newest} alt="Monthly New Arrivals" />
               </span>
               <div className="card__footer">
                 <span className="card__title"> New Arrivals </span>
@@ -68,15 +75,18 @@ export function Homepage() {
                   Check out the newest releses of this month
                 </span>
                 <div className="card__buttons">
-                  <button className="btn btn__secondary">
-                    <i className="fa-solid fa-angle-right"> </i>
-                  </button>
+                  <Link to="/products">
+                    <button className="btn btn__primary">
+                      <i className="fa-solid fa-angle-right"> </i>
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
         </div>
       )}
+      <Footer />
     </div>
   )
 }
