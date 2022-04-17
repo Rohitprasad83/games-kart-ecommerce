@@ -5,8 +5,9 @@ import { successToast } from '../toast/Toast'
 export function Navbar() {
   const { cartItems, cartDispatch } = useCart()
   const { wishlistItems, setWishlistItems } = useWishlistContext()
-  const { encodedToken, setEncodedToken } = useAuth('token')
+  const { setEncodedToken } = useAuth('token')
   const navigation = useNavigate()
+  const encodedToken = localStorage.getItem('token')
   const logoutHandler = () => {
     localStorage.removeItem('token')
     setEncodedToken(null)
