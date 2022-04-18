@@ -20,7 +20,7 @@ An Ecom site for buying premium games built using Mockbee api and Paricle UI.
 * [Particle UI](https://particle-ui.netlify.app)
 * [Mockbee](https://mockbee.netlify.app/)
 ## To Run Locally
-Clone the repository on your local machine with the command below in your terminal, and cd into the the-red-closet-ecom folder
+Clone the repository on your local machine with the command below in your terminal, and cd into the games-kart-ecommerce folder
 
 ### Clone the Repository
 ```
@@ -29,7 +29,7 @@ git clone https://github.com/Rohitprasad83/games-kart-ecommerce.git
 
 ### Running the App
 ```
-cd the-red-closet-ecom
+cd games-kart-ecommerce
 npm start
 ```
 
