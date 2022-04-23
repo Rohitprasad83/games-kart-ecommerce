@@ -11,6 +11,7 @@ import {
   Logout,
   Profile,
   Error404,
+  SingleProduct,
 } from './pages/index'
 import { ToastContainerCustom } from './components/toast/ToastContainer'
 
@@ -20,6 +21,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/products/:productId" element={<SingleProduct />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/login" element={<Login />} />

@@ -37,7 +37,9 @@ export function ProductCard({ product }) {
       </span>
 
       <span className={productStyle['card__image']}>
-        <img src={img} alt={title} />
+        <Link to={`/products/${_id}`}>
+          <img src={img} alt={title} />
+        </Link>
       </span>
       <div className="card__footer">
         <span className="card__title">{title}</span>
