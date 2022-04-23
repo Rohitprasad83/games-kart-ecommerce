@@ -1,14 +1,20 @@
 import { useState, useEffect } from 'react'
 import { Navbar } from 'components/navbar/Navbar.jsx'
 import { Footer } from 'components/footer/Footer.jsx'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import { products } from 'backend/db/products'
 import productStyle from './Products.module.css'
-
+import { useWishlistContext, useCart, useAuth } from 'context/index'
+import { containsInWishlist } from 'utils/wishlistUtils/index.jsx'
+import { wishlistHandler, addToCart } from 'services'
 function SingleProduct() {
   let { productId } = useParams()
   const navigate = useNavigate()
   const [product, setProduct] = useState({})
+  const { wishlistItems, setWishlistItems } = useWishlistContext()
+  const { cartItems, cartDispatch } = useCart()
+  const { encodedToken, setEncodedToken } = useAuth()
+
   useEffect(() => {
     const product = products.find(product => product._id === productId)
     product !== undefined ? setProduct(product) : navigate('/products')
@@ -51,14 +57,31 @@ function SingleProduct() {
             </span>
             <hr />
             <span className={productStyle['buttons']}>
-              <button
-                className={`btn btn__primary ${productStyle['single-product-btn']}`}>
+              {/* <button
+                className={`btn btn__primary ${productStyle['single-product-btn']}`}
+                onClick={() => addToCart(product, cartDispatch, encodedToken)}>
                 Add To Cart
-              </button>
+              </button> */}
               <button
                 className={`btn btn__secondary ${productStyle['single-product-btn']}`}>
                 Add To Wishlist
               </button>
+              {cartItems.products.some(item => item._id === product._id) ? (
+                <Link to="/cart">
+                  <button
+                    className={`btn btn__primary ${productStyle['single-product-btn']}`}>
+                    Go to Cart
+                  </button>
+                </Link>
+              ) : (
+                <button
+                  className={`btn btn__primary ${productStyle['single-product-btn']}`}
+                  onClick={() =>
+                    addToCart(product, cartDispatch, encodedToken)
+                  }>
+                  Add to Cart
+                </button>
+              )}
             </span>
           </div>
         </div>
