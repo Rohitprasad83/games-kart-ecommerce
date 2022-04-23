@@ -1,5 +1,4 @@
-import { Navbar } from 'components/navbar/Navbar.jsx'
-import { Footer } from 'components/footer/Footer'
+import { Navbar, Footer } from 'components/index'
 import { useChangeTitle } from 'utils/changeDocumentTitle'
 import error404 from 'assets/images/error404.png'
 export function Error404() {

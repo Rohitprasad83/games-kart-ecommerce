@@ -1,6 +1,5 @@
-import { Navbar } from 'components/navbar/Navbar.jsx'
+import { Navbar, Footer } from 'components/index'
 import { useChangeTitle } from 'utils/changeDocumentTitle'
-import { Footer } from 'components/footer/Footer'
 
 function Profile() {
   useChangeTitle('Profile')
@@ -8,7 +7,9 @@ function Profile() {
   return (
     <div className="home__container">
       <Navbar />
-      <div className="main__container"></div>
+      <div className="main__container">
+        <h3 className="text__center">This will be Profile Page</h3>
+      </div>
       <Footer />
     </div>
   )

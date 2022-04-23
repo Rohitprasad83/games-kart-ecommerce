@@ -1,5 +1,4 @@
-import { Navbar } from 'components/navbar/Navbar.jsx'
-import { Footer } from 'components/footer/Footer.jsx'
+import { Navbar, Footer } from 'components/index'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'

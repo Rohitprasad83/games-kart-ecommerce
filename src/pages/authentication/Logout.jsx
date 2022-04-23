@@ -1,6 +1,5 @@
 import auth from './Authentication.module.css'
-import { Navbar } from 'components/navbar/Navbar.jsx'
-import { Footer } from 'components/footer/Footer'
+import { Navbar, Footer } from 'components/index'
 import { Link } from 'react-router-dom'
 
 export function Logout() {
