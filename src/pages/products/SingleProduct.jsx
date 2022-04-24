@@ -13,7 +13,7 @@ function SingleProduct() {
   const [product, setProduct] = useState({})
   const { wishlistItems, setWishlistItems } = useWishlistContext()
   const { cartItems, cartDispatch } = useCart()
-  const { encodedToken, setEncodedToken } = useAuth()
+  const { encodedToken } = useAuth()
 
   useEffect(() => {
     const product = products.find(product => product._id === productId)
@@ -57,21 +57,32 @@ function SingleProduct() {
             </span>
             <hr />
             <span className={productStyle['buttons']}>
-              {/* <button
-                className={`btn btn__primary ${productStyle['single-product-btn']}`}
-                onClick={() => addToCart(product, cartDispatch, encodedToken)}>
-                Add To Cart
-              </button> */}
-              <button
-                className={`btn btn__secondary ${productStyle['single-product-btn']}`}>
-                Add To Wishlist
-              </button>
+              {containsInWishlist(productId, wishlistItems) ? (
+                <Link
+                  to="/wishlist"
+                  className={`btn btn__secondary ${productStyle['single-product-btn']}`}>
+                  Go to Wishlist
+                </Link>
+              ) : (
+                <button
+                  className={`btn btn__secondary ${productStyle['single-product-btn']}`}
+                  onClick={() =>
+                    wishlistHandler(
+                      product,
+                      wishlistItems,
+                      setWishlistItems,
+                      encodedToken
+                    )
+                  }>
+                  Add To Wishlist
+                </button>
+              )}
+
               {cartItems.products.some(item => item._id === product._id) ? (
-                <Link to="/cart">
-                  <button
-                    className={`btn btn__primary ${productStyle['single-product-btn']}`}>
-                    Go to Cart
-                  </button>
+                <Link
+                  to="/cart"
+                  className={`btn btn__primary ${productStyle['single-product-btn']}`}>
+                  Go to Cart
                 </Link>
               ) : (
                 <button

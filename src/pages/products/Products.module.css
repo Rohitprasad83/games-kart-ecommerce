@@ -113,6 +113,7 @@
     box-shadow: 10px 10px 8px #888888;
     border-radius: 1rem;
     height: 50rem;
+    position: relative;
 }
 
 .product-image>img {
@@ -152,11 +153,30 @@
     width: 100%;
     justify-content: center;
     margin-top: 3rem;
+    gap: 1rem;
 }
+
+
+/* .buttons>a {
+    height: 4rem;
+    width: 90%;
+} */
 
 .single-product-btn {
     height: 4rem;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    text-align: center;
+}
+
+.right-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
 }
 
 @media (max-width: 1024px) {
