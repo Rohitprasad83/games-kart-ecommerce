@@ -32,8 +32,10 @@ export function WishlistCard(product) {
             }></i>
         }
       </span>
-      <span className={wishlist['card__image']}>
-        <img src={img} alt={title} />
+      <span>
+        <Link to={`/products/${_id}`} className={wishlist['card__image']}>
+          <img src={img} alt={title} />
+        </Link>
       </span>
       <div className="card__footer">
         <span className="card__title">{title}</span>
