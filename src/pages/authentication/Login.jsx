@@ -32,8 +32,8 @@ export function Login() {
     }
   }
   const fillDummyDetails = () => {
-    setEmail('adarshbalika@gmail.com')
-    setPassword('adarshbalika')
+    setEmail('rohit.prasad@gmail.com')
+    setPassword('rohitprasad123')
   }
 
   const allFieldsAreFilled = email !== '' && password !== ''
