@@ -12,7 +12,7 @@ export function Login() {
   const [password, setPassword] = useState('')
   const navigation = useNavigate()
   const [error, setError] = useState(null)
-  const { users, setUsers, setEncodedToken } = useAuth()
+  const { setUser, setEncodedToken } = useAuth()
   useChangeTitle('Login')
   const loginHandler = async e => {
     e.preventDefault()
@@ -22,13 +22,14 @@ export function Login() {
         password,
       })
       localStorage.setItem('token', response.data.encodedToken)
-      setUsers(response.data.foundUser)
+      localStorage.setItem('user', JSON.stringify(response.data.foundUser))
+      setUser(response.data.foundUser)
       setEncodedToken(localStorage.getItem('token'))
       response.status === 200 && navigation('/')
       successToast('Welcome Back to GamesKart')
     } catch (err) {
       setError("Could'nt Login Up, Please try Again!")
-      errorToast(err)
+      errorToast(error)
     }
   }
   const fillDummyDetails = () => {
