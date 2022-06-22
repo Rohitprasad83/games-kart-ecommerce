@@ -18,10 +18,11 @@ export function Navbar() {
     cartDispatch({ type: 'RESET', payload: [] })
     setWishlistItems([])
   }
+
   return (
     <nav className="navbar simple">
       <Link to="/">
-        <h3 className="navbar__header"> Gamescart </h3>
+        <h3 className="navbar__header text__blue"> Gamescart </h3>
       </Link>
       <ul className="navbar__list">
         <li className="navbar__list__items">
