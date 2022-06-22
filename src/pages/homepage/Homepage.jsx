@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { testHero, bestseller, newest } from 'assets/images/index'
 import { Navbar, Footer } from 'components/index'
@@ -10,6 +10,7 @@ import 'styles/index.css'
 export function Homepage() {
   const [categories, setCategories] = useState([])
   const [error, setError] = useState(null)
+  const navigate = useNavigate()
 
   useChangeTitle('Home')
   useEffect(() => {
@@ -38,6 +39,11 @@ export function Homepage() {
               alt="Homepage Banner"
               className="responsive__img"
             />
+            <button
+              className="btn home-btn"
+              onClick={() => navigate('/products')}>
+              Explore
+            </button>
           </div>
           <h4 className="text__center">Categories</h4>
           <div className="categories">
