@@ -12,6 +12,7 @@ import {
   Profile,
   Error404,
   SingleProduct,
+  OrderSummary,
 } from './pages/index'
 import { ToastContainerCustom } from './components/toast/ToastContainer'
 
@@ -29,6 +30,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/mock" element={<Mockman />} />
+        <Route path="/orders" element={<OrderSummary />} />
+
         <Route path="*" element={<Error404 />} />
       </Routes>
 
