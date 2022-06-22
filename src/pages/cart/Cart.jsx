@@ -15,9 +15,9 @@ export function Cart() {
   const { defaultAddress } = useAddress()
   const { orderSummary, setOrderSummary } = useOrders()
 
-  useEffect(() => {
-    !encodedToken && navigation('/login')
-  }, [encodedToken])
+  // useEffect(() => {
+  //   !encodedToken && navigation('/login')
+  // }, [encodedToken])
 
   useEffect(() => getCartItems, [cartItems, cartDispatch])
 

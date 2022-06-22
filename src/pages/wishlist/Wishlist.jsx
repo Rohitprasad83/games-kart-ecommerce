@@ -33,6 +33,7 @@ export function Wishlist() {
       navigation('/login')
     }
   }, [wishlistItems, encodedToken])
+
   return (
     <div className="home__container">
       <Navbar />
