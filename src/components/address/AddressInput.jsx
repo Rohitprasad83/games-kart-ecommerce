@@ -3,7 +3,7 @@ import { useAddress } from 'context'
 import React, { useState } from 'react'
 import style from './address.module.css'
 function AddressInput({ address, setCreateAdd }) {
-  const { addressDispatch, setDefaultAddress } = useAddress()
+  const { defaultAddress, addressDispatch, setDefaultAddress } = useAddress()
   const [editAddressBool, setEditAddressBool] = useState(false)
 
   const { name, mobile, district, state, pincode } = address
@@ -61,11 +61,13 @@ function AddressInput({ address, setCreateAdd }) {
               }>
               Remove
             </button>
-            <button
-              className="btn btn__dark__outlined"
-              onClick={() => setDefaultAddress(address)}>
-              Make Default
-            </button>
+            {defaultAddress._id !== address._id && (
+              <button
+                className="btn btn__dark__outlined"
+                onClick={() => setDefaultAddress(address)}>
+                Make Default
+              </button>
+            )}
           </div>
         </div>
       ) : (
