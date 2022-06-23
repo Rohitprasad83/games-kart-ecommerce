@@ -20,7 +20,6 @@ export function Homepage() {
         setCategories(data.categories)
       } catch (err) {
         setError(true)
-        console.log(err)
       }
     })()
   }, [])
@@ -44,8 +43,11 @@ export function Homepage() {
               onClick={() => navigate('/products')}>
               Explore
             </button>
+            <div className="banner-txt">
+              Buy All Premium Games at One Place 🎲
+            </div>
           </div>
-          <h4 className="text__center">Categories</h4>
+          <h4 className="text__center">Shop by Categories</h4>
           <div className="categories">
             {categories.map(category => (
               <HomeProductCard key={category.id} category={category} />
