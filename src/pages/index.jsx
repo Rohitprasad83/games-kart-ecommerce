@@ -8,6 +8,7 @@ import { Logout } from './authentication/Logout.jsx'
 import { Profile } from './profile/Profile.jsx'
 import { Error404 } from './notFound.jsx'
 import { SingleProduct } from './products/SingleProduct.jsx'
+import { OrderSummary } from './cart/OrderSummary.jsx'
 export {
   Homepage,
   Products,
@@ -19,4 +20,5 @@ export {
   Profile,
   Error404,
   SingleProduct,
+  OrderSummary,
 }

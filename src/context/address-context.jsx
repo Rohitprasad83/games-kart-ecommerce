@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from 'react'
+import { createContext, useContext, useReducer, useState } from 'react'
 import { addressReducer } from 'reducer/addressReducer'
 import { v4 as uuid } from 'uuid'
 
@@ -32,8 +32,15 @@ const AddressContextProvider = ({ children }) => {
     addressReducer,
     initialAddress
   )
+  const [defaultAddress, setDefaultAddress] = useState(addressData.addresses[0])
   return (
-    <addressContext.Provider value={{ addressData, addressDispatch }}>
+    <addressContext.Provider
+      value={{
+        addressData,
+        addressDispatch,
+        defaultAddress,
+        setDefaultAddress,
+      }}>
       {children}
     </addressContext.Provider>
   )

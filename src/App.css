@@ -7,3 +7,9 @@
 .pointer {
     cursor: pointer;
 }
+
+.flex-between {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}

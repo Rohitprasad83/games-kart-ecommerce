@@ -1,13 +1,18 @@
 import { Navbar, Footer, Address } from 'components/index'
 import { useAuth } from 'context'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useChangeTitle } from 'utils/changeDocumentTitle'
 import profileStyle from './Profile.module.css'
 function Profile() {
   const [showAddress, setShowAddress] = useState(false)
   useChangeTitle('Profile')
   const { user } = useAuth()
+  const { state } = useLocation()
 
+  useEffect(() => {
+    state && setShowAddress(state.address)
+  }, [])
   return (
     <div className="home__container">
       <Navbar />
