@@ -13,7 +13,7 @@ export function Cart() {
   const navigation = useNavigate()
   const { user, encodedToken } = useAuth()
   const { defaultAddress } = useAddress()
-  const { orderSummary, setOrderSummary } = useOrders()
+  const { setOrderSummary } = useOrders()
 
   useEffect(() => getCartItems, [cartItems, cartDispatch])
 
@@ -104,6 +104,10 @@ export function Cart() {
     paymentObject.open()
   }
 
+  const changeDefaultAddress = () => {
+    navigation('/profile', { state: { address: true } })
+  }
+
   return (
     <div className="home__container">
       <Navbar />
@@ -123,9 +127,9 @@ export function Cart() {
                 </p>
                 <div className="flex-between">
                   <div className="font__bold">{defaultAddress.name}</div>
-                  <Link to="/profile">
+                  <div to="/profile" onClick={() => changeDefaultAddress()}>
                     <i className="fa-solid fa-gear pointer"></i>
-                  </Link>
+                  </div>
                 </div>
                 <p> {defaultAddress.address} </p>
                 <p> {defaultAddress.district} </p>
