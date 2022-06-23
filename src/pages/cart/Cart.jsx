@@ -15,10 +15,6 @@ export function Cart() {
   const { defaultAddress } = useAddress()
   const { orderSummary, setOrderSummary } = useOrders()
 
-  // useEffect(() => {
-  //   !encodedToken && navigation('/login')
-  // }, [encodedToken])
-
   useEffect(() => getCartItems, [cartItems, cartDispatch])
 
   useChangeTitle('Cart')
@@ -114,90 +110,94 @@ export function Cart() {
 
       <div className={`main__container ${cartStyle['main__container']}`}>
         <div className={cartStyle['cart__summary']}>
-          {cartItems.products.length > 0 && (
-            <div className={cartStyle['address']}>
-              <p className={cartStyle['address-header']}>
-                Shipping Address - Default
-              </p>
-              <div className="flex-between">
-                <div className="font__bold">{defaultAddress.name}</div>
-                <Link to="/profile">
-                  <i className="fa-solid fa-gear pointer"></i>
-                </Link>
-              </div>
-              <p> {defaultAddress.address} </p>
-              <p> {defaultAddress.district} </p>
-              <p> {defaultAddress.state} </p>
-              <p> {defaultAddress.pincode} </p>
-              <p>
-                <span>Mobile: </span> {defaultAddress.mobile}
-              </p>
-            </div>
-          )}
           <div className={cartStyle['cart__container']}>
             {cartItems.products.map(product => (
               <CartProductCard cartProduct={product} key={product._id} />
             ))}
           </div>
-
-          {cartItems.products.length === 0 ? (
-            <div className={cartStyle['flex__column']}>
-              <div className="text__lg text__center">Your Cart is Empty</div>
-              <div className="text__lg text__center">
-                Add Products to Your Cart
-              </div>
-              <Link to="/products" className="text__center">
-                <button className="btn btn__primary text__lg">Shop Now</button>
-              </Link>
-            </div>
-          ) : (
-            <div className={cartStyle['cart']}>
-              <h5>Price Details</h5>
-              <hr />
-              <div className={`${cartStyle['flex__column']} text__md`}>
-                <div className={cartStyle['flex__row']}>
-                  <span> Name</span>
-                  <span> Quantity</span>
+          <div className={cartStyle['cart__side']}>
+            {cartItems.products.length > 0 && (
+              <div className={cartStyle['address']}>
+                <p className={cartStyle['address-header']}>
+                  Shipping Address - Default
+                </p>
+                <div className="flex-between">
+                  <div className="font__bold">{defaultAddress.name}</div>
+                  <Link to="/profile">
+                    <i className="fa-solid fa-gear pointer"></i>
+                  </Link>
                 </div>
-                {cartItems.products.map(product => {
-                  return (
-                    <div className={cartStyle['flex__row']} key={product._id}>
-                      <span>{product.title}</span>
-                      <span className="text__right"> {product.quantity}</span>
-                    </div>
-                  )
-                })}
+                <p> {defaultAddress.address} </p>
+                <p> {defaultAddress.district} </p>
+                <p> {defaultAddress.state} </p>
+                <p> {defaultAddress.pincode} </p>
+                <p>
+                  <span>Mobile: </span> {defaultAddress.mobile}
+                </p>
               </div>
-              <div className={`${cartStyle['cart__details']} text__md`}>
-                Total Price
-                <span className="text__right">₹{totalPrice}</span>
+            )}
+
+            {cartItems.products.length === 0 ? (
+              <div className={cartStyle['flex__column']}>
+                <div className="text__lg text__center">Your Cart is Empty</div>
+                <div className="text__lg text__center">
+                  Add Products to Your Cart
+                </div>
+                <Link to="/products" className="text__center">
+                  <button className="btn btn__primary text__lg">
+                    Shop Now
+                  </button>
+                </Link>
               </div>
-              <div className={`${cartStyle['cart__details']} text__md`}>
-                Discount
-                <span>-₹{totalDiscount}</span>
+            ) : (
+              <div className={cartStyle['cart']}>
+                <h5>Price Details</h5>
+                <hr />
+                <div className={`${cartStyle['flex__column']} text__md`}>
+                  <div className={cartStyle['flex__row']}>
+                    <span> Name</span>
+                    <span> Quantity</span>
+                  </div>
+                  {cartItems.products.map(product => {
+                    return (
+                      <div className={cartStyle['flex__row']} key={product._id}>
+                        <span>{product.title}</span>
+                        <span className="text__right"> {product.quantity}</span>
+                      </div>
+                    )
+                  })}
+                </div>
+                <div className={`${cartStyle['cart__details']} text__md`}>
+                  Total Price
+                  <span className="text__right">₹{totalPrice}</span>
+                </div>
+                <div className={`${cartStyle['cart__details']} text__md`}>
+                  Discount
+                  <span>-₹{totalDiscount}</span>
+                </div>
+                <div className={`${cartStyle['cart__details']} text__md`}>
+                  Delivery Charges
+                  <span>₹499</span>
+                </div>
+                <hr />
+                <h5 className={cartStyle['cart__details']}>
+                  Total Amount
+                  <span className="text__lg">
+                    ₹{totalPrice - totalDiscount - 499}
+                  </span>
+                </h5>
+                <hr />
+                <div className="text__md">
+                  You will save ₹{totalDiscount} on this order
+                </div>
+                <button
+                  className={`btn btn__primary font__bold ${cartStyle['btn']}`}
+                  onClick={displayRazorpay}>
+                  Check out
+                </button>
               </div>
-              <div className={`${cartStyle['cart__details']} text__md`}>
-                Delivery Charges
-                <span>₹499</span>
-              </div>
-              <hr />
-              <h5 className={cartStyle['cart__details']}>
-                Total Amount
-                <span className="text__lg">
-                  ₹{totalPrice - totalDiscount - 499}
-                </span>
-              </h5>
-              <hr />
-              <div className="text__md">
-                You will save ₹{totalDiscount} on this order
-              </div>
-              <button
-                className={`btn btn__primary font__bold ${cartStyle['btn']}`}
-                onClick={displayRazorpay}>
-                Check out
-              </button>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
       <Footer />
