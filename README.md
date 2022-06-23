@@ -9,6 +9,10 @@ An Ecom site for buying premium games built using Mockbee api and Paricle UI.
 * Cart 
 * Sign Up 
 * Login
+* Single Product Page
+* Profile
+* Address Management
+* Payment Integration
 
 ## Tech Stack
 
