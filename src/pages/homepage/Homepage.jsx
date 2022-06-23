@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { testHero, bestseller, newest } from 'assets/images/index'
 import { Navbar, Footer } from 'components/index'
@@ -10,6 +10,7 @@ import 'styles/index.css'
 export function Homepage() {
   const [categories, setCategories] = useState([])
   const [error, setError] = useState(null)
+  const navigate = useNavigate()
 
   useChangeTitle('Home')
   useEffect(() => {
@@ -19,7 +20,6 @@ export function Homepage() {
         setCategories(data.categories)
       } catch (err) {
         setError(true)
-        console.log(err)
       }
     })()
   }, [])
@@ -38,8 +38,16 @@ export function Homepage() {
               alt="Homepage Banner"
               className="responsive__img"
             />
+            <button
+              className="btn home-btn"
+              onClick={() => navigate('/products')}>
+              Explore
+            </button>
+            <div className="banner-txt">
+              Buy All Premium Games at One Place 🎲
+            </div>
           </div>
-          <h4 className="text__center">Categories</h4>
+          <h4 className="text__center">Shop by Categories</h4>
           <div className="categories">
             {categories.map(category => (
               <HomeProductCard key={category.id} category={category} />

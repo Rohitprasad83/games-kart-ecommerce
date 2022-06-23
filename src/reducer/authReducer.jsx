@@ -16,8 +16,8 @@ function authReducer(state, action) {
         firstName: 'Rohit',
         lastName: 'Prasad',
         email: 'rohit.prasad@neog.com',
-        password: 'password',
-        confirmPassword: 'password',
+        password: 'rohit1234*',
+        confirmPassword: 'rohit1234*',
       }
     default:
       return { ...state }

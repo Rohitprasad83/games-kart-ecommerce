@@ -1,19 +1,24 @@
 import { Navbar, Footer } from 'components/index'
-import { Link, useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import auth from './Authentication.module.css'
 import { useAuth } from 'context/index.jsx'
 import { successToast, errorToast } from 'components/toast/Toast'
 import { useChangeTitle } from 'utils/changeDocumentTitle'
-
 export function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const navigation = useNavigate()
   const [error, setError] = useState(null)
-  const { users, setUsers, setEncodedToken } = useAuth()
+  const { encodedToken, setUser, setEncodedToken } = useAuth()
+  const location = useLocation()
   useChangeTitle('Login')
+  useEffect(() => {
+    if (encodedToken) {
+      navigation(location.state?.from?.pathname ?? '/', { replace: true })
+    }
+  }, [location, encodedToken, navigation])
   const loginHandler = async e => {
     e.preventDefault()
     try {
@@ -22,18 +27,19 @@ export function Login() {
         password,
       })
       localStorage.setItem('token', response.data.encodedToken)
-      setUsers(response.data.foundUser)
+      localStorage.setItem('user', JSON.stringify(response.data.foundUser))
+      setUser(response.data.foundUser)
       setEncodedToken(localStorage.getItem('token'))
       response.status === 200 && navigation('/')
       successToast('Welcome Back to GamesKart')
     } catch (err) {
       setError("Could'nt Login Up, Please try Again!")
-      errorToast(err)
+      errorToast(error)
     }
   }
   const fillDummyDetails = () => {
-    setEmail('adarshbalika@gmail.com')
-    setPassword('adarshbalika')
+    setEmail('rohit.prasad@gmail.com')
+    setPassword('rohitprasad123')
   }
 
   const allFieldsAreFilled = email !== '' && password !== ''

@@ -5,21 +5,24 @@ import { successToast } from '../toast/Toast'
 export function Navbar() {
   const { cartItems, cartDispatch } = useCart()
   const { wishlistItems, setWishlistItems } = useWishlistContext()
-  const { setEncodedToken } = useAuth('token')
+  const { encodedToken, setUser, setEncodedToken } = useAuth()
   const navigation = useNavigate()
-  const encodedToken = localStorage.getItem('token')
   const logoutHandler = () => {
     localStorage.removeItem('token')
+    localStorage.removeItem('user')
+
     setEncodedToken(null)
+    setUser(null)
     successToast('You have been successfully logged out')
     navigation('/login')
     cartDispatch({ type: 'RESET', payload: [] })
     setWishlistItems([])
   }
+
   return (
     <nav className="navbar simple">
       <Link to="/">
-        <h3 className="navbar__header"> Gamescart </h3>
+        <h3 className="navbar__header text__blue"> Gamescart </h3>
       </Link>
       <ul className="navbar__list">
         <li className="navbar__list__items">
@@ -54,13 +57,15 @@ export function Navbar() {
           </span>
         </li>
 
-        <li className="navbar__list__items">
-          <span className="badge__icons">
-            <Link to="/profile">
-              <i className="fa-solid fa-user icon"></i>
-            </Link>
-          </span>
-        </li>
+        {encodedToken && (
+          <li className="navbar__list__items">
+            <span className="badge__icons">
+              <Link to="/profile">
+                <i className="fa-solid fa-user icon"></i>
+              </Link>
+            </span>
+          </li>
+        )}
       </ul>
     </nav>
   )

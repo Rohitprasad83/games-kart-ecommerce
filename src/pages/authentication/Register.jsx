@@ -1,6 +1,6 @@
-import { useState, useReducer } from 'react'
+import { useState, useReducer, useEffect } from 'react'
 import { Navbar, Footer } from 'components/index'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate, Link, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import auth from './Authentication.module.css'
 import { authReducer } from 'reducer/authReducer.jsx'
@@ -20,9 +20,16 @@ export function Register() {
   const [showPassword, setShowPassword] = useState('password')
   const navigation = useNavigate()
   const { email, firstName, lastName, password, confirmPassword } = userState
-  const { setUsers, setEncodedToken } = useAuth()
+  const location = useLocation()
+  const { encodedToken, setUser, setEncodedToken } = useAuth()
 
   useChangeTitle('Register')
+
+  useEffect(() => {
+    if (encodedToken) {
+      navigation(location.state?.from?.pathname ?? '/', { replace: true })
+    }
+  }, [location, encodedToken, navigation])
   const SignUpHandler = async e => {
     e.preventDefault()
     try {
@@ -33,8 +40,10 @@ export function Register() {
         password,
       })
       localStorage.setItem('token', response.data.encodedToken)
+      localStorage.setItem('user', JSON.stringify(response.data.createdUser))
+
       setEncodedToken(localStorage.getItem('token'))
-      setUsers(response.data.createdUser)
+      setUser(response.data.createdUser)
       response.status === 201 && navigation('/')
       successToast('Welcome to GamesKart')
     } catch (err) {

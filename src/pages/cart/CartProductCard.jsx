@@ -28,17 +28,17 @@ function CartProductCard({ cartProduct: product }) {
           <button
             className={cartStyle['quantity__btn']}
             onClick={() =>
-              quantityHandler(_id, 'increment', cartDispatch, encodedToken)
+              quantityHandler(_id, 'decrement', cartDispatch, encodedToken)
             }>
-            +
+            -
           </button>
           <div>{quantity}</div>
           <button
             className={cartStyle['quantity__btn']}
             onClick={() =>
-              quantityHandler(_id, 'decrement', cartDispatch, encodedToken)
+              quantityHandler(_id, 'increment', cartDispatch, encodedToken)
             }>
-            -
+            +
           </button>
         </div>
         <hr />
