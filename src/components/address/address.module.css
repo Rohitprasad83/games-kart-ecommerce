@@ -1,0 +1,56 @@
+.address-input {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    border: 2px solid var(--gray);
+    border-radius: 1rem;
+    padding: 2rem 0.2rem;
+}
+
+.address-input>input {
+    outline: none;
+    border-bottom: 1px solid var(--gray);
+    height: 3rem;
+    padding: 0 1rem;
+}
+
+.address-input>input:focus {
+    outline: none;
+    border-bottom: 1px solid var(--primary);
+}
+
+.address-buttons {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.address-buttons>button {
+    width: 8em;
+}
+
+.address-text {
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.address-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.address {
+    border: 1px solid var(--gray);
+    background-color: var(--pure-white);
+    padding: 0.5rem;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.createBtn {
+    width: max-content;
+    font-size: 0.8em;
+}

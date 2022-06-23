@@ -20,7 +20,7 @@ export function Register() {
   const [showPassword, setShowPassword] = useState('password')
   const navigation = useNavigate()
   const { email, firstName, lastName, password, confirmPassword } = userState
-  const { setUsers, setEncodedToken } = useAuth()
+  const { setUser, setEncodedToken } = useAuth()
 
   useChangeTitle('Register')
   const SignUpHandler = async e => {
@@ -33,8 +33,10 @@ export function Register() {
         password,
       })
       localStorage.setItem('token', response.data.encodedToken)
+      localStorage.setItem('user', JSON.stringify(response.data.createdUser))
+
       setEncodedToken(localStorage.getItem('token'))
-      setUsers(response.data.createdUser)
+      setUser(response.data.createdUser)
       response.status === 201 && navigation('/')
       successToast('Welcome to GamesKart')
     } catch (err) {
