@@ -17,7 +17,7 @@ export function ProductCard({ product }) {
   return (
     <div className={`${productStyle['card']} card__shadow`}>
       <span
-        className="card__icon right"
+        className={`${productStyle['card__icon']}`}
         onClick={() =>
           wishlistHandler(
             product,
