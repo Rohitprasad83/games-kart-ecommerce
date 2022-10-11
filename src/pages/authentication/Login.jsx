@@ -21,6 +21,9 @@ export function Login() {
   }, [location, encodedToken, navigation])
   const loginHandler = async e => {
     e.preventDefault()
+    // console.log('from api call ', email)
+    // console.log('from api call ', password)
+
     try {
       const response = await axios.post('/api/auth/login', {
         email,

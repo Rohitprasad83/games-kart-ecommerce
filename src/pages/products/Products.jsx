@@ -12,6 +12,7 @@ import {
   filterByRange,
   filterProductsByRating,
 } from 'utils/productUtils/index'
+import empty from 'assets/images/emptycart.svg'
 
 export function Products() {
   const [products, setProducts] = useState([])
@@ -39,10 +40,16 @@ export function Products() {
 
       <div className={product['main__container']}>
         <Filters />
+
         <main className={product['products__container']}>
           {sortedData.map(product => (
             <ProductCard key={product._id} product={product} />
           ))}
+          {sortedData && sortedData.length < 1 && (
+            <div className="empty">
+              <img src={empty} alt="empty" />
+            </div>
+          )}
         </main>
       </div>
       <Footer />
